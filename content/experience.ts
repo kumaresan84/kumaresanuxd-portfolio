@@ -8,7 +8,7 @@ export type ExperienceEntry = {
 
 export const experience: ExperienceEntry[] = [
   {
-    role: "Associate Manager - Experience Design",
+    role: "Manager - Experience Design",
     company: "Infosys Ltd",
     location: "Bangalore, Karnataka",
     period: "Sep 2018 - Current",
