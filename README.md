@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kumaresan Munusamy — Portfolio
 
-## Getting Started
+UX/UI design portfolio, built with Next.js (App Router), TypeScript, Tailwind CSS, and Framer Motion.
 
-First, run the development server:
+## Run locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Editing content
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+All real content lives in `content/`, not scattered across components:
 
-## Learn More
+- `content/profile.ts` — name, title, bio, contact, resume link, social links
+- `content/experience.ts` — work history timeline entries
+- `content/projects.ts` — project cards + case studies, grouped by category
 
-To learn more about Next.js, take a look at the following resources:
+### Adding/finishing a case study
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Each entry in `content/projects.ts` can optionally include `overview`, `uxProcess`, and `solution`.
+If a project only has a `summary`, its case-study page shows a "coming soon" note instead —
+add the missing fields to flesh it out. `slug` becomes the URL: `/projects/<slug>`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Adding your real images (step by step)
 
-## Deploy on Vercel
+Every project shows abstract gradient placeholder art until you give it real images.
+No component changes needed — it's all driven by two fields in `content/projects.ts`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**1. Export from Figma**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Select the frame → Export panel → export at **2x** as **PNG** (or WebP).
+- Cover images look best around **1600×1000** (16:10). Case-study screens: **1200×900** (4:3).
+- Keep file sizes reasonable (< 500 KB each if you can — use [squoosh.app](https://squoosh.app) to compress).
+
+**2. Drop files into the project**
+
+```
+public/projects/<slug>/cover.png
+public/projects/<slug>/screen-1.png
+public/projects/<slug>/screen-2.png
+```
+
+Example: `public/projects/online-classroom/cover.png`
+
+**3. Point the project at them** in `content/projects.ts`:
+
+```ts
+{
+  slug: "online-classroom",
+  ...
+  cover: "/projects/online-classroom/cover.png",
+  screens: [
+    "/projects/online-classroom/screen-1.png",
+    "/projects/online-classroom/screen-2.png",
+  ],
+}
+```
+
+- `cover` replaces the gradient art on the home-page card **and** the case-study hero.
+- `screens` fills the "Selected screens" gallery at the end of the case study
+  (until then it shows two placeholder tiles).
+
+**Other assets to swap:**
+
+- **Resume**: replace `public/resume-placeholder.pdf` (same filename, or update
+  `resumeHref` in `content/profile.ts`).
+- **Social links**: update the `href`s in `content/profile.ts` (LinkedIn/Behance/Dribbble
+  are placeholder URLs right now).
+- **Case-study copy**: the four web-app case studies besides "Online classroom" use
+  plausible placeholder copy (marked with comments in `content/projects.ts`) — rewrite
+  them with your real process and outcomes. The Icon/Art/Fun projects are placeholder
+  entries; replace titles, summaries, and gradients with your actual work.
+
+## Dark theme & hero video
+
+- The theme toggle (moon/sun in the header) persists to `localStorage` and respects the
+  OS preference on first visit.
+- In dark mode the hero plays `public/hero-bg-dark.mp4` — a free animated background from
+  [motionsites.ai/backgrounds](https://motionsites.ai/backgrounds), self-hosted. Swap the
+  file to change the vibe (keep it dark-toned; the type sits on top). It's skipped for
+  users with reduced-motion enabled and never loads in light mode. Check MotionSites'
+  license terms before production use.
+
+## Deploy
+
+This is a standard Next.js app — [Vercel](https://vercel.com/new) is the path of least resistance:
+push this repo to GitHub, then import it on Vercel. No environment variables or backend services
+are required for the current version.
