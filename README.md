@@ -75,15 +75,14 @@ Example: `public/projects/online-classroom/cover.png`
   them with your real process and outcomes. The Icon/Art/Fun projects are placeholder
   entries; replace titles, summaries, and gradients with your actual work.
 
-## Dark theme & hero video
+## Dark theme & hero animation
 
 - The theme toggle (moon/sun in the header) persists to `localStorage` and respects the
   OS preference on first visit.
-- In dark mode the hero plays `public/hero-bg-dark.mp4` — a free animated background from
-  [motionsites.ai/backgrounds](https://motionsites.ai/backgrounds), self-hosted. Swap the
-  file to change the vibe (keep it dark-toned; the type sits on top). It's skipped for
-  users with reduced-motion enabled and never loads in light mode. Check MotionSites'
-  license terms before production use.
+- The hero backdrop is an "aurora" animation — three blurred color fields drifting on slow
+  CSS keyframes. Its colors come from the `--aurora-*` variables in `app/globals.css`
+  (one set per theme), so it stays visible in both light and dark and re-tints
+  automatically if you change the accent. It pauses for users with reduced motion enabled.
 
 ## Deploy
 

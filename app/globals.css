@@ -6,10 +6,13 @@
   --foreground: #17130e;
   --muted: #6f6354;
   --border: #e2d8c6;
-  --accent: #c4603a;
-  --accent-foreground: #fff8f2;
+  --accent: #7440d9;
+  --accent-foreground: #f6f2ff;
   --ink: #17130e;
   --ink-foreground: #f4efe6;
+  --aurora-1: rgba(133, 96, 235, 0.32);
+  --aurora-2: rgba(206, 125, 224, 0.24);
+  --aurora-3: rgba(97, 118, 235, 0.22);
 }
 
 html.dark {
@@ -18,10 +21,13 @@ html.dark {
   --foreground: #f4efe6;
   --muted: #a2968a;
   --border: #2b261f;
-  --accent: #d97a52;
-  --accent-foreground: #1a0f08;
+  --accent: #a78bfa;
+  --accent-foreground: #1c1233;
   --ink: #0a0908;
   --ink-foreground: #f4efe6;
+  --aurora-1: rgba(124, 77, 240, 0.34);
+  --aurora-2: rgba(178, 74, 214, 0.22);
+  --aurora-3: rgba(66, 78, 224, 0.24);
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
@@ -90,4 +96,58 @@ body {
 .text-stroke {
   -webkit-text-stroke: 1.5px var(--foreground);
   color: transparent;
+}
+
+/* aurora hero backdrop — blurred color fields that read on light and dark */
+.aurora-blob {
+  position: absolute;
+  width: 44vw;
+  height: 44vw;
+  min-width: 420px;
+  min-height: 420px;
+  border-radius: 50%;
+  filter: blur(110px);
+  will-change: transform;
+}
+
+.aurora-1 {
+  top: -12%;
+  right: -6%;
+  background: var(--aurora-1);
+  animation: aurora-a 26s ease-in-out infinite alternate;
+}
+
+.aurora-2 {
+  top: 26%;
+  right: 20%;
+  background: var(--aurora-2);
+  animation: aurora-b 32s ease-in-out infinite alternate;
+}
+
+.aurora-3 {
+  bottom: -20%;
+  left: 32%;
+  background: var(--aurora-3);
+  animation: aurora-c 38s ease-in-out infinite alternate;
+}
+
+@keyframes aurora-a {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(-14vw, 12vh) scale(1.25); }
+}
+
+@keyframes aurora-b {
+  from { transform: translate(0, 0) scale(1.15); }
+  to { transform: translate(10vw, -8vh) scale(0.9); }
+}
+
+@keyframes aurora-c {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(-9vw, -12vh) scale(1.2); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora-blob {
+    animation: none;
+  }
 }

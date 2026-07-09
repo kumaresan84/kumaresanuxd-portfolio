@@ -1,61 +1,27 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
 import { motion } from "framer-motion";
 import { ArrowDown, MapPin } from "lucide-react";
 import { profile } from "@/content/profile";
-import { useIsDark } from "@/components/ThemeToggle";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-const reducedMotionQuery = "(prefers-reduced-motion: reduce)";
-
-function subscribeReducedMotion(callback: () => void) {
-  const media = window.matchMedia(reducedMotionQuery);
-  media.addEventListener("change", callback);
-  return () => media.removeEventListener("change", callback);
-}
-
-function useReducedMotion() {
-  return useSyncExternalStore(
-    subscribeReducedMotion,
-    () => window.matchMedia(reducedMotionQuery).matches,
-    () => true
-  );
-}
-
-/** Animated video backdrop, shown only in dark theme (video is black-based). */
-function HeroVideo() {
-  const dark = useIsDark();
-  const reducedMotion = useReducedMotion();
-
-  // the video mounts after hydration, so autoPlay alone doesn't fire reliably
-  const play = (el: HTMLVideoElement | null) => {
-    el?.play().catch(() => {});
-  };
-
-  if (!dark || reducedMotion) return null;
-
+/**
+ * Drifting aurora backdrop. Colors come from the --aurora-* theme variables,
+ * so it stays visible in both light and dark; reduced motion is handled in CSS.
+ */
+function HeroAurora() {
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 1.2 }}
+      transition={{ duration: 1.4 }}
       className="pointer-events-none absolute inset-0 overflow-hidden"
       aria-hidden
     >
-      <video
-        ref={play}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        src="/hero-bg-dark.mp4"
-        className="h-full w-full object-cover opacity-50"
-      />
-      {/* keep the display type readable over the video */}
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-background/20" />
+      <div className="aurora-blob aurora-1" />
+      <div className="aurora-blob aurora-2" />
+      <div className="aurora-blob aurora-3" />
     </motion.div>
   );
 }
@@ -78,7 +44,7 @@ function Line({ children, delay }: { children: React.ReactNode; delay: number })
 export default function Hero() {
   return (
     <section className="relative flex min-h-svh flex-col justify-end px-6 pb-16 pt-32 lg:px-10">
-      <HeroVideo />
+      <HeroAurora />
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
