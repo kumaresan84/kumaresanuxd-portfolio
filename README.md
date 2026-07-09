@@ -25,6 +25,10 @@ Each entry in `content/projects.ts` can optionally include `overview`, `uxProces
 If a project only has a `summary`, its case-study page shows a "coming soon" note instead —
 add the missing fields to flesh it out. `slug` becomes the URL: `/projects/<slug>`.
 
+**Recommended workflow**: drop your raw write-up in `content/case-studies/<slug>/notes.md`
+and images in `public/projects/<slug>/`, then have Claude build the real page from them.
+See [content/case-studies/README.md](content/case-studies/README.md) for the full guide.
+
 ## Adding your real images (step by step)
 
 Every project shows abstract gradient placeholder art until you give it real images.

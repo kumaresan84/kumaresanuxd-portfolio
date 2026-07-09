@@ -1,27 +1,118 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { ArrowDown, MapPin } from "lucide-react";
 import { profile } from "@/content/profile";
+import { useIsDark } from "@/components/ThemeToggle";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
 /**
- * Drifting aurora backdrop. Colors come from the --aurora-* theme variables,
- * so it stays visible in both light and dark; reduced motion is handled in CSS.
+ * Canvas hero backdrop with a distinct animation per theme:
+ * dark — a glowing violet dot-wave terrain; light — flowing ink-line ribbons.
+ * Renders a single static frame when the user prefers reduced motion.
  */
-function HeroAurora() {
+function HeroBackdrop() {
+  const dark = useIsDark();
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas?.getContext("2d");
+    if (!canvas || !ctx) return;
+
+    let raf = 0;
+    let w = 0;
+    let h = 0;
+
+    const resize = () => {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = canvas.clientWidth;
+      h = canvas.clientHeight;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+    resize();
+    window.addEventListener("resize", resize);
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // dark: grid of dots displaced by two crossing sine waves, lit by height
+    const drawDotWave = (t: number) => {
+      ctx.clearRect(0, 0, w, h);
+      const gap = 26;
+      const cols = Math.ceil(w / gap) + 1;
+      const rows = Math.ceil(h / gap) + 1;
+      for (let iy = 0; iy <= rows; iy++) {
+        for (let ix = 0; ix <= cols; ix++) {
+          const wave =
+            Math.sin(ix * 0.32 + t * 0.9) * Math.cos(iy * 0.26 - t * 0.65) * 0.7 +
+            Math.sin((ix + iy) * 0.18 + t * 0.5) * 0.3;
+          const alpha = 0.1 + (wave + 1) * 0.28;
+          const radius = 0.8 + (wave + 1) * 1.15;
+          ctx.beginPath();
+          ctx.arc(ix * gap, iy * gap + wave * 11, radius, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(167, 139, 250, ${alpha})`;
+          ctx.fill();
+        }
+      }
+    };
+
+    // light: three bands of layered sine ribbons in violet/plum/indigo ink
+    const ribbonBands = [
+      { rgb: "116, 64, 217", base: 0.28, amp: 72, k: 0.0045, speed: 0.55 },
+      { rgb: "168, 85, 247", base: 0.52, amp: 92, k: 0.0037, speed: -0.42 },
+      { rgb: "99, 102, 241", base: 0.76, amp: 62, k: 0.005, speed: 0.48 },
+    ];
+
+    const drawRibbons = (t: number) => {
+      ctx.clearRect(0, 0, w, h);
+      ctx.lineWidth = 1.4;
+      for (const band of ribbonBands) {
+        for (let i = 0; i < 9; i++) {
+          ctx.beginPath();
+          for (let x = -24; x <= w + 24; x += 8) {
+            const y =
+              h * band.base +
+              i * 9 +
+              Math.sin(x * band.k + t * band.speed + i * 0.35) * band.amp +
+              Math.sin(x * band.k * 2.3 - t * band.speed * 0.8) * band.amp * 0.3;
+            if (x === -24) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+          }
+          ctx.strokeStyle = `rgba(${band.rgb}, ${0.34 - i * 0.03})`;
+          ctx.stroke();
+        }
+      }
+    };
+
+    const loop = (now: number) => {
+      const t = now / 1000;
+      if (dark) drawDotWave(t);
+      else drawRibbons(t);
+      if (!reduced) raf = requestAnimationFrame(loop);
+    };
+    raf = requestAnimationFrame(loop);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("resize", resize);
+    };
+  }, [dark]);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 1.4 }}
+      transition={{ duration: 1.2 }}
       className="pointer-events-none absolute inset-0 overflow-hidden"
       aria-hidden
     >
-      <div className="aurora-blob aurora-1" />
-      <div className="aurora-blob aurora-2" />
-      <div className="aurora-blob aurora-3" />
+      <canvas ref={canvasRef} className="h-full w-full" />
+      {/* calm zone behind the headline so the type stays crisp */}
+      <div className="absolute inset-0 bg-gradient-to-r from-background via-background/55 to-transparent" />
     </motion.div>
   );
 }
@@ -44,7 +135,7 @@ function Line({ children, delay }: { children: React.ReactNode; delay: number })
 export default function Hero() {
   return (
     <section className="relative flex min-h-svh flex-col justify-end px-6 pb-16 pt-32 lg:px-10">
-      <HeroAurora />
+      <HeroBackdrop />
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
