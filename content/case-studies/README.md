@@ -35,18 +35,27 @@ between everything (it's also the URL: `/projects/<slug>`).
 2. Drop exported images into `public/projects/<slug>/`.
    From Figma: select frame → Export → 2x PNG. Compress at https://squoosh.app if large.
 3. Ask Claude: *"Build the real case study for `<slug>` from its notes and images."*
-   Claude reads `notes.md`, wires the images (`cover` / `screens` fields), and rewrites
-   the placeholder copy in `content/projects.ts`.
+   Claude reads `notes.md` and rewrites the placeholder copy in `content/projects.ts`.
+
+**Images wire themselves up** — no code edits needed. The site scans
+`public/projects/<slug>/` automatically (see `lib/project-images.ts`):
+
+- a file named `cover.*` (jpg/png/webp) becomes the card + case-study hero image
+- **every other image** in the folder shows in the "Selected screens" gallery,
+  sorted by filename (`screen-1.png`, `screen-2.png`, … keeps them in order)
+- in dev, refresh the page after dropping files; in production it's picked up at build
+
+To replace a generated cover with a real one, just overwrite `cover.jpg`.
 
 ## Current status
 
-| slug                       | notes.md          | images |
-| -------------------------- | ----------------- | ------ |
-| online-classroom           | ✅ real content    | ⬜ none |
-| logistics-app              | ⬜ template        | ⬜ none |
-| mobile-survey-admin-system | ⬜ template        | ⬜ none |
-| forecasting-in-pharma      | ⬜ template        | ⬜ none |
-| stock-market-app           | ⬜ template        | ⬜ none |
+| slug                       | notes.md          | images                     |
+| -------------------------- | ----------------- | -------------------------- |
+| online-classroom           | ✅ real content    | ✅ 7 screens + cover        |
+| logistics-app              | ⬜ template        | 🎨 generated cover only     |
+| mobile-survey-admin-system | ⬜ template        | 🎨 generated cover only     |
+| forecasting-in-pharma      | ⬜ template        | 🎨 generated cover only     |
+| stock-market-app           | ⬜ template        | 🎨 generated cover only     |
 
 Icon / Art / Fun projects: same idea — create `content/case-studies/<slug>/notes.md`
 and `public/projects/<slug>/` when you're ready to make them real.

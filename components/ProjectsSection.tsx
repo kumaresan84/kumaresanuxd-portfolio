@@ -2,12 +2,12 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { categories, getProjectsByCategory, type ProjectCategory } from "@/content/projects";
+import { categories, type Project, type ProjectCategory } from "@/content/projects";
 import ProjectCard from "@/components/ProjectCard";
 
-export default function ProjectsSection() {
+export default function ProjectsSection({ projects: allProjects }: { projects: Project[] }) {
   const [active, setActive] = useState<ProjectCategory>("web-mobile");
-  const projects = getProjectsByCategory(active);
+  const projects = allProjects.filter((p) => p.category === active);
 
   return (
     <section id="work" className="mx-auto max-w-7xl scroll-mt-24 px-6 py-28 lg:px-10">

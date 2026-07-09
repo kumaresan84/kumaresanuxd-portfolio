@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { projects, getProject, getProjectsByCategory } from "@/content/projects";
+import { withImages } from "@/lib/project-images";
 import CaseStudyBody from "@/components/CaseStudyBody";
 import SiteHeader from "@/components/SiteHeader";
 
@@ -37,9 +38,11 @@ export default async function ProjectPage({
     <main className="min-h-screen bg-background">
       <SiteHeader />
       <CaseStudyBody
-        project={project}
-        prevProject={index > 0 ? siblings[index - 1] : undefined}
-        nextProject={index < siblings.length - 1 ? siblings[index + 1] : undefined}
+        project={withImages(project)}
+        prevProject={index > 0 ? withImages(siblings[index - 1]) : undefined}
+        nextProject={
+          index < siblings.length - 1 ? withImages(siblings[index + 1]) : undefined
+        }
       />
     </main>
   );
