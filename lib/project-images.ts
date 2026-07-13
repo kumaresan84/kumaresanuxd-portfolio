@@ -6,35 +6,21 @@ const IMAGE_RE = /\.(png|jpe?g|webp|avif)$/i;
 const COVER_RE = /^cover\./i;
 
 /**
- * Scans public/projects/<slug>/ at render time (build time in production).
- * `cover.*` becomes the cover; every other image becomes a gallery screen,
- * sorted naturally by filename — so dropping files in is all it takes.
+ * Finds the cover image for a project on disk at build time.
+ * Drop a `cover.*` (jpg/png/webp) into public/projects/<slug>/ and it's picked up.
+ * Case-study gallery images are referenced explicitly in each project's blocks.
  */
-export function getProjectImages(slug: string): { cover?: string; screens: string[] } {
+export function getProjectCover(slug: string): string | undefined {
   const dir = path.join(process.cwd(), "public", "projects", slug);
-  let files: string[] = [];
   try {
-    files = fs.readdirSync(dir).filter((f) => IMAGE_RE.test(f));
+    const cover = fs.readdirSync(dir).find((f) => IMAGE_RE.test(f) && COVER_RE.test(f));
+    return cover ? `/projects/${slug}/${cover}` : undefined;
   } catch {
-    return { screens: [] };
+    return undefined;
   }
-  const coverFile = files.find((f) => COVER_RE.test(f));
-  const screens = files
-    .filter((f) => !COVER_RE.test(f))
-    .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
-    .map((f) => `/projects/${slug}/${f}`);
-  return {
-    cover: coverFile ? `/projects/${slug}/${coverFile}` : undefined,
-    screens,
-  };
 }
 
-/** Merge images found on disk into a project; explicit fields in projects.ts win. */
+/** Merge the cover found on disk into a project; an explicit `cover` in projects.ts wins. */
 export function withImages(project: Project): Project {
-  const found = getProjectImages(project.slug);
-  return {
-    ...project,
-    cover: project.cover ?? found.cover,
-    screens: project.screens?.length ? project.screens : found.screens,
-  };
+  return { ...project, cover: project.cover ?? getProjectCover(project.slug) };
 }

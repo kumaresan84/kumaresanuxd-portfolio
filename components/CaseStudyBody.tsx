@@ -4,10 +4,164 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import type { Project } from "@/content/projects";
-import { PlaceholderArt, ProjectVisual } from "@/components/ProjectCard";
+import type { CaseBlock, Project } from "@/content/projects";
+import { ProjectVisual } from "@/components/ProjectCard";
 
 const ease = [0.22, 1, 0.36, 1] as const;
+
+const reveal = {
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-60px" },
+  transition: { duration: 0.55, ease },
+};
+
+function SectionLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <p className="text-sm font-medium uppercase tracking-[0.2em] text-accent">{children}</p>
+  );
+}
+
+function Gallery({
+  block,
+  slug,
+}: {
+  block: Extract<CaseBlock, { type: "gallery" }>;
+  slug: string;
+}) {
+  const images = block.images ?? [];
+  const single = block.layout === "single";
+
+  if (images.length === 0) {
+    return (
+      <div className="mt-8 flex min-h-52 flex-col items-center justify-center rounded-2xl border border-dashed border-border bg-surface/50 p-10 text-center">
+        <p className="font-display text-lg text-muted">{block.heading} — coming soon</p>
+        <p className="mt-2 max-w-sm text-sm text-muted/80">
+          {block.note ?? `Drop images into public/projects/${slug}/ to fill this section.`}
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className={
+        single ? "mt-8" : "mt-8 grid gap-5 sm:grid-cols-2"
+      }
+    >
+      {images.map((src) => (
+        <motion.div
+          key={src}
+          {...reveal}
+          className={`relative overflow-hidden rounded-2xl border border-border bg-surface ${
+            single ? "aspect-[16/9]" : "aspect-[4/3]"
+          }`}
+        >
+          <Image
+            src={src}
+            alt={`${block.heading} screen`}
+            fill
+            sizes={single ? "100vw" : "(min-width: 640px) 50vw, 100vw"}
+            className="object-contain p-3"
+          />
+        </motion.div>
+      ))}
+    </div>
+  );
+}
+
+function Block({ block, slug }: { block: CaseBlock; slug: string }) {
+  switch (block.type) {
+    case "prose":
+      return (
+        <section className="mt-16">
+          {block.heading && <SectionLabel>{block.heading}</SectionLabel>}
+          <div className={block.heading ? "mt-4 space-y-4" : "space-y-4"}>
+            {block.body.map((p, i) => (
+              <p
+                key={i}
+                className={
+                  block.heading
+                    ? "max-w-3xl text-lg leading-relaxed text-muted"
+                    : "max-w-3xl text-xl leading-relaxed text-foreground sm:text-2xl"
+                }
+              >
+                {p}
+              </p>
+            ))}
+          </div>
+        </section>
+      );
+
+    case "bullets":
+      return (
+        <section className="mt-16">
+          <SectionLabel>{block.heading}</SectionLabel>
+          <ul className="mt-6 max-w-3xl space-y-4">
+            {block.items.map((item, i) => (
+              <li key={i} className="flex gap-4 text-lg leading-relaxed text-muted">
+                <span className="mt-2.5 h-1.5 w-1.5 flex-none rounded-full bg-accent" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      );
+
+    case "labeled": {
+      const cols = block.items.length > 4 ? "sm:grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-2";
+      return (
+        <section className="mt-16">
+          <SectionLabel>{block.heading}</SectionLabel>
+          <div className={`mt-8 grid gap-5 ${cols}`}>
+            {block.items.map((item, i) => (
+              <motion.div
+                key={item.label}
+                {...reveal}
+                transition={{ ...reveal.transition, delay: (i % 3) * 0.06 }}
+                className="rounded-2xl border border-border bg-surface p-6"
+              >
+                <span className="font-display text-sm text-accent">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="mt-2 font-display text-xl font-medium">{item.label}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted">{item.body}</p>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+      );
+    }
+
+    case "meta":
+      return (
+        <section className="mt-16">
+          <SectionLabel>{block.heading}</SectionLabel>
+          <div className="mt-5 flex flex-wrap gap-2">
+            {block.body.split(",").map((chip, i) => (
+              <span
+                key={i}
+                className="rounded-full border border-border bg-surface px-4 py-1.5 text-sm text-muted"
+              >
+                {chip.trim().replace(/\.$/, "")}
+              </span>
+            ))}
+          </div>
+        </section>
+      );
+
+    case "gallery":
+      return (
+        <section className="mt-16">
+          <SectionLabel>{block.heading}</SectionLabel>
+          {block.note && block.images?.length ? (
+            <p className="mt-2 text-sm text-muted">{block.note}</p>
+          ) : null}
+          <Gallery block={block} slug={slug} />
+        </section>
+      );
+  }
+}
 
 export default function CaseStudyBody({
   project,
@@ -48,7 +202,7 @@ export default function CaseStudyBody({
         transition={{ duration: 0.7, delay: 0.1, ease }}
         className="mt-6 max-w-2xl text-lg leading-relaxed text-muted"
       >
-        {project.overview ?? project.summary}
+        {project.summary}
       </motion.p>
 
       <motion.div
@@ -60,97 +214,9 @@ export default function CaseStudyBody({
         <ProjectVisual project={project} className="aspect-[16/9]" />
       </motion.div>
 
-      {project.uxProcess && (
-        <section className="mt-24">
-          <p className="text-sm font-medium uppercase tracking-[0.2em] text-accent">Process</p>
-          <h2 className="mt-3 font-display text-3xl font-medium">How it came together</h2>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {project.uxProcess.map((step, i) => (
-              <motion.div
-                key={step.label}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.5, delay: (i % 3) * 0.08, ease }}
-                className="rounded-2xl border border-border bg-surface p-6"
-              >
-                <span className="font-display text-sm text-accent">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 className="mt-2 font-display text-xl font-medium">{step.label}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{step.body}</p>
-              </motion.div>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {project.solution && (
-        <section className="mt-24">
-          <p className="text-sm font-medium uppercase tracking-[0.2em] text-accent">Solution</p>
-          <h2 className="mt-3 font-display text-3xl font-medium">What shipped</h2>
-          <div className="mt-10 space-y-4">
-            {project.solution.map((point) => (
-              <motion.div
-                key={point.title}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.5, ease }}
-                className="rounded-2xl bg-ink p-8 text-ink-foreground"
-              >
-                <h3 className="font-display text-xl font-medium">{point.title}</h3>
-                <p className="mt-2 leading-relaxed text-ink-foreground/70">{point.body}</p>
-              </motion.div>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {(project.uxProcess || project.solution) && (
-        <section className="mt-24">
-          <p className="text-sm font-medium uppercase tracking-[0.2em] text-accent">Screens</p>
-          <h2 className="mt-3 font-display text-3xl font-medium">Selected screens</h2>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2">
-            {project.screens?.length
-              ? project.screens.map((src) => (
-                  <motion.div
-                    key={src}
-                    initial={{ opacity: 0, y: 24 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-60px" }}
-                    transition={{ duration: 0.5, ease }}
-                    className="relative aspect-[4/3] overflow-hidden rounded-2xl"
-                  >
-                    <Image
-                      src={src}
-                      alt={`${project.title} screen`}
-                      fill
-                      sizes="(min-width: 640px) 50vw, 100vw"
-                      className="object-cover"
-                    />
-                  </motion.div>
-                ))
-              : [0, 1].map((i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, y: 24 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-60px" }}
-                    transition={{ duration: 0.5, delay: i * 0.08, ease }}
-                  >
-                    <PlaceholderArt project={project} className="aspect-[4/3] rounded-2xl" />
-                  </motion.div>
-                ))}
-          </div>
-        </section>
-      )}
-
-      {!project.uxProcess && !project.solution && (
-        <section className="mt-24 rounded-3xl border border-dashed border-border p-10 text-center text-muted">
-          Full case study — process, solution, and screens — coming soon.
-        </section>
-      )}
+      {project.blocks?.map((block, i) => (
+        <Block key={i} block={block} slug={project.slug} />
+      ))}
 
       <div className="mt-24 flex items-center justify-between gap-6 border-t border-border pt-8">
         {prevProject ? (
