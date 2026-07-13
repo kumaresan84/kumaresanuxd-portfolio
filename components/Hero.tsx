@@ -134,60 +134,63 @@ function Line({ children, delay }: { children: React.ReactNode; delay: number })
 
 export default function Hero() {
   return (
-    <section className="relative flex min-h-svh flex-col justify-end px-6 pb-16 pt-32 lg:px-10">
+    <section className="relative flex min-h-svh flex-col justify-end pb-16 pt-32">
       <HeroBackdrop />
-      <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.2, ease }}
-        className="relative mb-8 flex flex-wrap items-center gap-3 text-sm text-muted"
-      >
-        <span className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-1.5">
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
-          </span>
-          Open to opportunities
-        </span>
-        <span className="inline-flex items-center gap-1.5">
-          <MapPin size={14} />
-          {profile.location}
-        </span>
-      </motion.div>
-
-      <h1 className="relative font-display text-[13vw] font-medium leading-[0.95] tracking-tight lg:text-[9.5vw]">
-        <Line delay={0.1}>Designing</Line>
-        <Line delay={0.22}>
-          <span className="text-stroke">experiences</span>
-        </Line>
-        <Line delay={0.34}>
-          that people <span className="text-accent">love.</span>
-        </Line>
-      </h1>
-
-      <div className="relative mt-10 flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
+      {/* content constrained to the same max-w-7xl track as the header + sections */}
+      <div className="relative mx-auto w-full max-w-7xl px-6 lg:px-10">
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.55, ease }}
-          className="max-w-md text-lg leading-relaxed text-muted"
+          transition={{ duration: 0.6, delay: 0.2, ease }}
+          className="mb-8 flex flex-wrap items-center gap-3 text-sm text-muted"
         >
-          {profile.name} — {profile.title} with 16+ years crafting digital
-          products across education, logistics, pharma, and fintech.
-        </motion.p>
-
-        <motion.a
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.7, delay: 0.7 }}
-          href="#work"
-          className="group inline-flex w-fit items-center gap-3 text-sm font-medium"
-        >
-          <span className="flex h-12 w-12 items-center justify-center rounded-full border border-foreground transition-colors group-hover:bg-foreground group-hover:text-background">
-            <ArrowDown size={18} className="transition-transform group-hover:translate-y-0.5" />
+          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-1.5">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+            </span>
+            Open to opportunities
           </span>
-          See the work
-        </motion.a>
+          <span className="inline-flex items-center gap-1.5">
+            <MapPin size={14} />
+            {profile.location}
+          </span>
+        </motion.div>
+
+        <h1 className="font-display text-[13vw] font-medium leading-[0.95] tracking-tight lg:text-[min(9.5vw,11rem)]">
+          <Line delay={0.1}>Designing</Line>
+          <Line delay={0.22}>
+            <span className="text-stroke">experiences</span>
+          </Line>
+          <Line delay={0.34}>
+            that people <span className="text-accent">love.</span>
+          </Line>
+        </h1>
+
+        <div className="mt-10 flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.55, ease }}
+            className="max-w-md text-lg leading-relaxed text-muted"
+          >
+            {profile.name} — {profile.title} with 16+ years crafting digital
+            products across education, logistics, pharma, and fintech.
+          </motion.p>
+
+          <motion.a
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.7 }}
+            href="#work"
+            className="group inline-flex w-fit items-center gap-3 text-sm font-medium"
+          >
+            <span className="flex h-12 w-12 items-center justify-center rounded-full border border-foreground transition-colors group-hover:bg-foreground group-hover:text-background">
+              <ArrowDown size={18} className="transition-transform group-hover:translate-y-0.5" />
+            </span>
+            See the work
+          </motion.a>
+        </div>
       </div>
     </section>
   );
