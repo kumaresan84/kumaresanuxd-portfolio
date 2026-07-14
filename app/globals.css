@@ -91,3 +91,14 @@ body {
   -webkit-text-stroke: 1.5px var(--foreground);
   color: transparent;
 }
+
+/* lightbox — resting state is fully visible; animation is a subtle
+   scale-in enhancement, so it never renders invisible if the animation
+   is disabled or interrupted */
+@keyframes lb-pop {
+  from { transform: scale(0.985); }
+  to { transform: none; }
+}
+.lb-pop {
+  animation: lb-pop 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+}

@@ -2,10 +2,12 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, Maximize2 } from "lucide-react";
 import type { CaseBlock, Project } from "@/content/projects";
 import { ProjectVisual } from "@/components/ProjectCard";
+import Lightbox, { type LightboxImage } from "@/components/Lightbox";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -25,9 +27,11 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 function Gallery({
   block,
   slug,
+  onOpen,
 }: {
   block: Extract<CaseBlock, { type: "gallery" }>;
   slug: string;
+  onOpen: (src: string) => void;
 }) {
   const images = block.images ?? [];
   const single = block.layout === "single";
@@ -44,16 +48,14 @@ function Gallery({
   }
 
   return (
-    <div
-      className={
-        single ? "mt-8" : "mt-8 grid gap-5 sm:grid-cols-2"
-      }
-    >
+    <div className={single ? "mt-8" : "mt-8 grid gap-5 sm:grid-cols-2"}>
       {images.map((src) => (
-        <motion.div
+        <motion.button
           key={src}
           {...reveal}
-          className={`relative overflow-hidden rounded-2xl border border-border bg-surface ${
+          onClick={() => onOpen(src)}
+          aria-label={`Open ${block.heading} image in full view`}
+          className={`group relative block w-full cursor-zoom-in overflow-hidden rounded-2xl border border-border bg-surface ${
             single ? "aspect-[16/9]" : "aspect-[4/3]"
           }`}
         >
@@ -62,15 +64,28 @@ function Gallery({
             alt={`${block.heading} screen`}
             fill
             sizes={single ? "100vw" : "(min-width: 640px) 50vw, 100vw"}
-            className="object-contain p-3"
+            className="object-contain p-3 transition-transform duration-500 group-hover:scale-[1.02]"
           />
-        </motion.div>
+          <span className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:bg-background/25 group-hover:opacity-100">
+            <span className="flex h-11 w-11 items-center justify-center rounded-full border border-border bg-surface/90 text-foreground backdrop-blur">
+              <Maximize2 size={18} />
+            </span>
+          </span>
+        </motion.button>
       ))}
     </div>
   );
 }
 
-function Block({ block, slug }: { block: CaseBlock; slug: string }) {
+function Block({
+  block,
+  slug,
+  onOpen,
+}: {
+  block: CaseBlock;
+  slug: string;
+  onOpen: (src: string) => void;
+}) {
   switch (block.type) {
     case "prose":
       return (
@@ -154,7 +169,7 @@ function Block({ block, slug }: { block: CaseBlock; slug: string }) {
       return (
         <section className="mt-16">
           <SectionLabel>{block.heading}</SectionLabel>
-          <Gallery block={block} slug={slug} />
+          <Gallery block={block} slug={slug} onOpen={onOpen} />
         </section>
       );
   }
@@ -169,6 +184,26 @@ export default function CaseStudyBody({
   prevProject?: Project;
   nextProject?: Project;
 }) {
+  // Flat list of every gallery image, in page order, for the lightbox to page through.
+  const allImages = useMemo<LightboxImage[]>(() => {
+    const out: LightboxImage[] = [];
+    for (const b of project.blocks ?? []) {
+      if (b.type === "gallery" && b.images?.length) {
+        for (const src of b.images) out.push({ src, section: b.heading });
+      }
+    }
+    return out;
+  }, [project.blocks]);
+
+  const indexBySrc = useMemo(
+    () => new Map(allImages.map((im, i) => [im.src, i])),
+    [allImages],
+  );
+
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const openSrc = (src: string) => setOpenIndex(indexBySrc.get(src) ?? null);
+  const count = allImages.length;
+
   return (
     <article className="mx-auto max-w-5xl px-6 pb-24 pt-32 lg:px-10">
       <Link
@@ -212,7 +247,7 @@ export default function CaseStudyBody({
       </motion.div>
 
       {project.blocks?.map((block, i) => (
-        <Block key={i} block={block} slug={project.slug} />
+        <Block key={i} block={block} slug={project.slug} onOpen={openSrc} />
       ))}
 
       <div className="mt-24 flex items-center justify-between gap-6 border-t border-border pt-8">
@@ -241,6 +276,15 @@ export default function CaseStudyBody({
           </Link>
         )}
       </div>
+
+      <Lightbox
+        images={allImages}
+        index={openIndex}
+        title={project.title}
+        onClose={() => setOpenIndex(null)}
+        onPrev={() => setOpenIndex((i) => (i === null ? null : (i - 1 + count) % count))}
+        onNext={() => setOpenIndex((i) => (i === null ? null : (i + 1) % count))}
+      />
     </article>
   );
 }
