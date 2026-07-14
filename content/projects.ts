@@ -20,8 +20,10 @@ export const categories: { id: ProjectCategory; label: string }[] = [
  * - bullets  : a headed bullet list
  * - labeled  : a headed set of label + body items (e.g. "The Users", process steps)
  * - meta     : a headed one-line value (e.g. "Deliverables")
- * - gallery  : a named image section. Provide `images` (paths under public/) to
- *              show real screens; omit them to show a labeled placeholder to fill later.
+ * - gallery  : a named image section. Images resolve from public/projects/<slug>/
+ *              at build time: explicit `images` win; else files whose name starts
+ *              with `match` (e.g. "wireframe" → wireframe-1.png); else, if it's the
+ *              only auto gallery, every non-cover image. Empty → labeled placeholder.
  */
 export type CaseBlock =
   | { type: "prose"; heading?: string; body: string[] }
@@ -33,6 +35,8 @@ export type CaseBlock =
       heading: string;
       note?: string;
       images?: string[];
+      /** filename prefix to pull from the folder, for projects with several galleries */
+      match?: string;
       layout?: "grid" | "single";
     };
 
@@ -159,7 +163,7 @@ export const projects: Project[] = [
           "Top user-ranked carrier mobile application on both iOS and Android.",
         ],
       },
-      { type: "gallery", heading: "Design Screens", note: "Real screens coming — drop images into public/projects/logistics-app/", layout: "grid" },
+      { type: "gallery", heading: "Design Screens", note: "Drop any images (except cover.*) into public/projects/logistics-app/", layout: "grid" },
     ],
   },
   {
@@ -185,9 +189,9 @@ export const projects: Project[] = [
           "Designed an admin platform that lets teams build surveys visually, push them to targeted device groups, and turn incoming responses into clear, actionable analytics — from questionnaire authoring, through live monitoring, to reporting.",
         ],
       },
-      { type: "gallery", heading: "Wireframes", note: "Real screens coming — drop images into public/projects/mobile-survey-admin-system/", layout: "grid" },
-      { type: "gallery", heading: "Visual Designs", layout: "grid" },
-      { type: "gallery", heading: "Mobile Designs", layout: "grid" },
+      { type: "gallery", heading: "Wireframes", match: "wireframe", note: "Name files wireframe-1.png, wireframe-2.png… in public/projects/mobile-survey-admin-system/", layout: "grid" },
+      { type: "gallery", heading: "Visual Designs", match: "visual", note: "Name files visual-1.png… in the same folder", layout: "grid" },
+      { type: "gallery", heading: "Mobile Designs", match: "mobile", note: "Name files mobile-1.png… in the same folder", layout: "grid" },
     ],
   },
   {
@@ -218,9 +222,9 @@ export const projects: Project[] = [
         heading: "Deliverables",
         body: "User Personas, Information Architecture, User Flow Diagram, Low-Fidelity Wireframes, High-Fidelity Mock-up screens, Interactive Prototypes.",
       },
-      { type: "gallery", heading: "Paper Sketches", note: "Real sketches coming — drop images into public/projects/forecasting-in-pharma/", layout: "grid" },
-      { type: "gallery", heading: "Wireframes", layout: "grid" },
-      { type: "gallery", heading: "Design Screens", layout: "grid" },
+      { type: "gallery", heading: "Paper Sketches", match: "sketch", note: "Name files sketch-1.png… in public/projects/forecasting-in-pharma/", layout: "grid" },
+      { type: "gallery", heading: "Wireframes", match: "wireframe", note: "Name files wireframe-1.png… in the same folder", layout: "grid" },
+      { type: "gallery", heading: "Design Screens", match: "screen", note: "Name files screen-1.png… in the same folder", layout: "grid" },
     ],
   },
   {

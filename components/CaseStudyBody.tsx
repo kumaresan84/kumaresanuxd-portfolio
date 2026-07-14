@@ -154,9 +154,6 @@ function Block({ block, slug }: { block: CaseBlock; slug: string }) {
       return (
         <section className="mt-16">
           <SectionLabel>{block.heading}</SectionLabel>
-          {block.note && block.images?.length ? (
-            <p className="mt-2 text-sm text-muted">{block.note}</p>
-          ) : null}
           <Gallery block={block} slug={slug} />
         </section>
       );
