@@ -18,8 +18,8 @@ export default function AboutSection() {
         About <span className="font-hand font-normal text-accent">me</span>
       </motion.h2>
 
-      <div className="mt-14 grid gap-10 lg:grid-cols-[1fr_3fr] lg:items-start">
-        {/* image — 1 of 4 */}
+      <div className="mt-14 grid gap-10 lg:grid-cols-2 lg:items-center">
+        {/* image — 50% */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -34,7 +34,7 @@ export default function AboutSection() {
           />
         </motion.div>
 
-        {/* text — 3 of 4 */}
+        {/* text — 50% */}
         <div className="space-y-8">
           {profile.bio.map((paragraph, i) => (
             <motion.p
