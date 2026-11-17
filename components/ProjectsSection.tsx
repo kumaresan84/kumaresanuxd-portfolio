@@ -35,7 +35,7 @@ function FeaturedCard({ project }: { project: Project }) {
       >
         <div className="overflow-hidden rounded-2xl">
           <div className="transition-transform duration-500 ease-out group-hover:scale-[1.02]">
-            <ProjectVisual project={project} className="aspect-[16/9]" />
+            <ProjectVisual project={project} className="aspect-[950/622]" />
           </div>
         </div>
         <div className="flex items-start justify-between gap-4 px-2 pb-1 pt-5 sm:px-3">
