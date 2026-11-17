@@ -7,9 +7,10 @@ import { profile } from "@/content/profile";
 import ThemeToggle from "@/components/ThemeToggle";
 
 const links = [
+  { href: "/#work", label: "Work" },
   { href: "/#about", label: "About" },
   { href: "/#experience", label: "Experience" },
-  { href: "/#work", label: "Work" },
+  { href: "/#ai", label: "With AI" },
   { href: "/#contact", label: "Contact" },
 ];
 
