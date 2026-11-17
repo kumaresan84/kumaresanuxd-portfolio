@@ -8,19 +8,16 @@ const ease = [0.22, 1, 0.36, 1] as const;
 export default function ExperienceTimeline() {
   return (
     <section id="experience" className="mx-auto max-w-7xl scroll-mt-24 px-6 py-28 lg:px-10">
-      <motion.p
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="text-sm font-medium uppercase tracking-[0.2em] text-accent"
+      <motion.h2
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 0.7, ease }}
+        className="font-display text-4xl font-medium tracking-tight sm:text-5xl lg:text-6xl"
       >
-        02 — Experience
-      </motion.p>
-
-      <h2 className="mt-4 font-display text-4xl font-medium tracking-tight sm:text-5xl">
-        17 years, 6 teams
-      </h2>
+        Work <span className="font-hand font-normal text-accent">experience</span>
+      </motion.h2>
+      <p className="mt-3 text-muted">17 years · 6 teams</p>
 
       <ol className="mt-12">
         {experience.map((entry, i) => (

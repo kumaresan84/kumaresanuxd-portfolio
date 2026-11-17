@@ -8,17 +8,33 @@ const ease = [0.22, 1, 0.36, 1] as const;
 export default function AboutSection() {
   return (
     <section id="about" className="mx-auto max-w-7xl scroll-mt-24 px-6 py-28 lg:px-10">
-      <div className="grid gap-10 lg:grid-cols-[1fr_2fr]">
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-sm font-medium uppercase tracking-[0.2em] text-accent"
-        >
-          01 — About
-        </motion.p>
+      <motion.h2
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 0.7, ease }}
+        className="font-display text-4xl font-medium tracking-tight sm:text-5xl lg:text-6xl"
+      >
+        About <span className="font-hand font-normal text-accent">me</span>
+      </motion.h2>
 
+      <div className="mt-14 grid gap-10 lg:grid-cols-[1fr_3fr] lg:items-start">
+        {/* image — 1 of 4 */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.8, ease }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/about-illustration.png"
+            alt="Illustrated highlights — experienced UX designer, problem solving, drawing unique characters, watching movies"
+            className="w-full"
+          />
+        </motion.div>
+
+        {/* text — 3 of 4 */}
         <div className="space-y-8">
           {profile.bio.map((paragraph, i) => (
             <motion.p
@@ -38,21 +54,6 @@ export default function AboutSection() {
           ))}
         </div>
       </div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.8, ease }}
-        className="mt-16"
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/about-illustration.png"
-          alt="Illustrated highlights — experienced UX designer, problem solving, drawing unique characters, watching movies"
-          className="mx-auto w-full max-w-4xl"
-        />
-      </motion.div>
     </section>
   );
 }

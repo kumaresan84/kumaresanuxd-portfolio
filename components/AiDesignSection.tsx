@@ -41,22 +41,12 @@ const cards: Card[] = [
 export default function AiDesignSection() {
   return (
     <section id="ai" className="mx-auto max-w-7xl scroll-mt-24 px-6 py-28 lg:px-10">
-      <motion.p
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="text-sm font-medium uppercase tracking-[0.2em] text-accent"
-      >
-        03 — Designing with AI
-      </motion.p>
-
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.7, ease }}
-        className="mt-4 font-display text-4xl font-medium tracking-tight sm:text-5xl lg:text-6xl"
+        className="font-display text-4xl font-medium tracking-tight sm:text-5xl lg:text-6xl"
       >
         How I{" "}
         <span className="font-hand font-normal text-accent">design with AI.</span>
