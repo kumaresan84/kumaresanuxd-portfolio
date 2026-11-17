@@ -227,38 +227,6 @@ export const projects: Project[] = [
       { type: "gallery", heading: "Design Screens", match: "screen", note: "Name files screen-1.png… in the same folder", layout: "grid" },
     ],
   },
-  {
-    slug: "stock-market-app",
-    category: "web-mobile",
-    title: "App for Indian Stock Market",
-    tag: "Fintech",
-    gradient: ["#8a5a1f", "#d9b36a"],
-    summary:
-      "A user-friendly web application for the Indian stock market, providing simple, intuitive tools to help investors make informed decisions.",
-    blocks: [
-      {
-        type: "prose",
-        heading: "Problem Statement",
-        body: [
-          "Existing Indian stock-market web applications are often complex and lack features tailored to the Indian investor. This creates a barrier for many users and hinders informed decision-making. The goal: a user-friendly, accessible web application that empowers Indian investors of all experience levels.",
-        ],
-      },
-      {
-        type: "labeled",
-        heading: "Design Solution",
-        items: [
-          { label: "Understanding User Needs", body: "Conducted user interviews and surveys with a diverse range of Indian stockholders to understand their goals, challenges, and tech savviness, and analysed behaviour on existing apps to identify pain points and opportunities." },
-          { label: "Solid Information Architecture", body: "Developed a clear, logical sitemap and meticulously crafted user flows for common tasks — so users can seamlessly create watchlists, snapshots, portfolios and screeners." },
-          { label: "Wireframes and Prototypes", body: "Created low-fidelity wireframes defining the core layout and functionality, then evolved them into interactive prototypes so users could test the interface and flow in a simulated environment." },
-          { label: "Usability Testing", body: "Ran usability testing sessions with target users to unearth issues and areas for improvement, ensuring the application is intuitive and user-friendly." },
-          { label: "Visual Design", body: "Designed a clean interface prioritising clear information hierarchy and intuitive navigation, with cultural sensitivities considered in visuals and colour." },
-          { label: "Design Validation", body: "Transferred the designs to the development team and monitored implementation closely, ensuring the built screens accurately reflect the shared specifications." },
-        ],
-      },
-      { type: "gallery", heading: "Visual Designs", note: "Real screens coming — drop images into public/projects/stock-market-app/", layout: "grid" },
-    ],
-  },
-
   // ─────────────────────────────── Icon Designs ───────────────────────────────
   {
     slug: "product-icon-suite",
