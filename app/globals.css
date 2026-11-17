@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f4efe6;
-  --surface: #fdfbf6;
+  --background: #f5f4f1;
+  --surface: #ffffff;
   --foreground: #17130e;
   --muted: #6f6354;
   --border: #e2d8c6;
