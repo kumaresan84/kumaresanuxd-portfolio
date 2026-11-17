@@ -6,8 +6,8 @@
   --foreground: #17130e;
   --muted: #6f6354;
   --border: #e2d8c6;
-  --accent: #7440d9;
-  --accent-foreground: #f6f2ff;
+  --accent: #0284c7;
+  --accent-foreground: #f0f9ff;
   --ink: #17130e;
   --ink-foreground: #f4efe6;
 }
@@ -18,8 +18,8 @@ html.dark {
   --foreground: #f4efe6;
   --muted: #a2968a;
   --border: #2b261f;
-  --accent: #a78bfa;
-  --accent-foreground: #1c1233;
+  --accent: #38bdf8;
+  --accent-foreground: #082032;
   --ink: #0a0908;
   --ink-foreground: #f4efe6;
 }
