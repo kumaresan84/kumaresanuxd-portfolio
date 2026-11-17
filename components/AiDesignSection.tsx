@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Search, LayoutTemplate, Code2, Download, type LucideIcon } from "lucide-react";
+import { Download } from "lucide-react";
 import { profile } from "@/content/profile";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -9,7 +9,7 @@ const ease = [0.22, 1, 0.36, 1] as const;
 type Card = {
   no: string;
   label: string;
-  Icon: LucideIcon;
+  image: string;
   title: string;
   body: string;
 };
@@ -18,21 +18,21 @@ const cards: Card[] = [
   {
     no: "01",
     label: "Research & Synthesis",
-    Icon: Search,
+    image: "/ai/research-synthesis.png",
     title: "Research synthesis",
     body: "I use AI to cluster hundreds of interview transcripts into themes in minutes, then apply human judgement to validate, merge and name them.",
   },
   {
     no: "02",
     label: "Rapid Prototyping",
-    Icon: LayoutTemplate,
+    image: "/ai/production-prototypes.png",
     title: "Production-real prototypes",
     body: "I generate complex, realistic synthetic data so usability tests reveal real density and edge-case problems, not lorem-ipsum illusions.",
   },
   {
     no: "03",
     label: "Code-Bridging",
-    Icon: Code2,
+    image: "/ai/specs-that-ship.png",
     title: "Specs that ship",
     body: "I build AI tooling that turns design-system specs into component logic, closing the gap between design intent and what ships.",
   },
@@ -79,9 +79,15 @@ export default function AiDesignSection() {
               <span className="font-display text-sm text-muted">{c.no}</span>
             </div>
 
-            {/* illustration slot — swap for a real illustration later */}
-            <div className="mt-6 flex h-44 items-center justify-center rounded-2xl bg-accent/10">
-              <c.Icon className="text-accent" size={46} strokeWidth={1.3} />
+            {/* hand-drawn illustration (white-backed so it reads in both themes) */}
+            <div className="mt-6 overflow-hidden rounded-2xl border border-border bg-white">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={c.image}
+                alt={`${c.title} illustration`}
+                className="aspect-[4/3] w-full object-contain"
+                loading="lazy"
+              />
             </div>
 
             <h3 className="mt-7 font-display text-xl font-medium sm:text-2xl">{c.title}</h3>
