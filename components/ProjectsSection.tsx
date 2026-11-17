@@ -90,7 +90,7 @@ export default function ProjectsSection({ projects: allProjects }: { projects: P
   const [featured, ...rest] = projects;
 
   return (
-    <section id="work" className="mx-auto max-w-7xl scroll-mt-24 px-6 py-28 lg:px-10">
+    <section id="work" className="mx-auto max-w-7xl scroll-mt-24 px-6 py-16 lg:px-10">
       <div className="flex flex-wrap items-end justify-between gap-6">
         <h2 className="font-display text-4xl font-medium tracking-tight sm:text-5xl lg:text-6xl">
           Selected{" "}

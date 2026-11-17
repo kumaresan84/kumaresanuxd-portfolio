@@ -36,7 +36,7 @@ function Column({ label, children }: { label: string; children: React.ReactNode 
 export default function ContactCTA() {
   return (
     <footer id="contact" className="scroll-mt-24 bg-ink text-ink-foreground">
-      <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
+      <div className="mx-auto max-w-7xl px-6 py-16 lg:px-10">
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}

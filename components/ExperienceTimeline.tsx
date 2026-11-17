@@ -7,7 +7,7 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 export default function ExperienceTimeline() {
   return (
-    <section id="experience" className="mx-auto max-w-7xl scroll-mt-24 px-6 py-28 lg:px-10">
+    <section id="experience" className="mx-auto max-w-7xl scroll-mt-24 px-6 py-16 lg:px-10">
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
