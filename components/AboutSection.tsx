@@ -38,6 +38,21 @@ export default function AboutSection() {
           ))}
         </div>
       </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 0.8, ease }}
+        className="mt-16"
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/about-illustration.png"
+          alt="Illustrated highlights — experienced UX designer, problem solving, drawing unique characters, watching movies"
+          className="mx-auto w-full max-w-4xl"
+        />
+      </motion.div>
     </section>
   );
 }
