@@ -22,18 +22,18 @@ export default function Hero() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-70" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
             </span>
-            Open to design leadership roles in AI &amp; enterprise products
+            Open to senior UX &amp; design leadership roles
           </motion.span>
 
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.18, ease }}
-            className="mt-8 max-w-xl font-display text-5xl font-medium leading-[1.02] tracking-tight sm:text-6xl lg:text-[4.25rem]"
+            className="mt-8 max-w-xl font-display text-4xl font-medium leading-[1.06] tracking-tight sm:text-5xl lg:text-[3.5rem]"
           >
-            Designing{" "}
-            <span className="font-hand font-normal text-accent">intuitive</span>{" "}
-            experiences for enterprise AI.
+            Design isn&apos;t just how it looks —{" "}
+            it&apos;s how it{" "}
+            <span className="font-hand font-normal text-accent">works</span>.
           </motion.h1>
 
           <motion.p
@@ -42,12 +42,12 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.3, ease }}
             className="mt-7 max-w-xl text-lg leading-relaxed text-muted"
           >
-            {profile.title} with{" "}
-            <span className="font-medium text-foreground">16+ years</span> across
-            enterprise products — from design systems and data-dense dashboards to
-            agentic AI experiences. I turn ambiguous, high-stakes problems into{" "}
+            UX/UI designer with{" "}
+            <span className="font-medium text-foreground">17 years</span> solving
+            user problems through simple, intuitive design. My work spans finance,
+            e-commerce, healthcare, education, logistics, and agriculture —{" "}
             <span className="font-medium text-foreground">
-              products and patterns that teams build on.
+              always curious about emerging tech and design trends.
             </span>
           </motion.p>
 
