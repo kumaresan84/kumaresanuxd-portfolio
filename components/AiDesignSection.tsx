@@ -79,8 +79,8 @@ export default function AiDesignSection() {
               <span className="font-display text-sm text-muted">{c.no}</span>
             </div>
 
-            {/* hand-drawn illustration (white-backed so it reads in both themes) */}
-            <div className="mt-6 overflow-hidden rounded-2xl border border-border bg-white">
+            {/* hand-drawn illustration (panel matches the art's own background) */}
+            <div className="mt-6 overflow-hidden rounded-2xl bg-[#fdfdfd]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={c.image}
