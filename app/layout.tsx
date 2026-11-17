@@ -27,7 +27,7 @@ const caveat = Caveat({
 export const metadata: Metadata = {
   title: "Kumaresan Munusamy — UX Designer",
   description:
-    "UX/UI design portfolio of Kumaresan Munusamy — 16+ years designing digital products across education, logistics, pharma, and fintech.",
+    "UX/UI design portfolio of Kumaresan Munusamy — 17 years designing digital products across education, logistics, pharma, and fintech.",
 };
 
 export default function RootLayout({

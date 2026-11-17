@@ -19,7 +19,7 @@ export default function ExperienceTimeline() {
       </motion.p>
 
       <h2 className="mt-4 font-display text-4xl font-medium tracking-tight sm:text-5xl">
-        16 years, 6 teams
+        17 years, 6 teams
       </h2>
 
       <ol className="mt-12">
