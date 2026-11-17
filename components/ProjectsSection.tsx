@@ -34,7 +34,7 @@ function FeaturedCard({ project }: { project: Project }) {
         className="group block overflow-hidden rounded-3xl border border-border bg-surface p-3 sm:p-4"
       >
         <div className="overflow-hidden rounded-2xl">
-          <div className="transition-transform duration-500 ease-out group-hover:scale-[1.02]">
+          <div className="transform-gpu backface-hidden will-change-transform transition-transform duration-500 ease-out group-hover:scale-[1.02]">
             <ProjectVisual project={project} className="aspect-[950/622]" />
           </div>
         </div>
@@ -66,7 +66,7 @@ function GridCard({ project, i }: { project: Project; i: number }) {
         className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-surface p-3"
       >
         <div className="overflow-hidden rounded-2xl">
-          <div className="transition-transform duration-500 ease-out group-hover:scale-[1.03]">
+          <div className="transform-gpu backface-hidden will-change-transform transition-transform duration-500 ease-out group-hover:scale-[1.03]">
             <ProjectVisual project={project} className="aspect-[4/3]" />
           </div>
         </div>
