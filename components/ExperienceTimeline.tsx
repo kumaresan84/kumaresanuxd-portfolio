@@ -30,13 +30,10 @@ export default function ExperienceTimeline() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.6, delay: i * 0.05, ease }}
-            className="group relative border-t border-border last:border-b"
+            className="border-t border-border last:border-b"
           >
-            <div className="pointer-events-none absolute inset-0 origin-bottom scale-y-0 bg-ink transition-transform duration-300 ease-out group-hover:scale-y-100" />
-            <div className="relative grid gap-1 px-2 py-7 transition-colors duration-300 group-hover:text-ink-foreground sm:grid-cols-[10rem_1fr_auto] sm:items-baseline sm:gap-6">
-              <p className="text-sm text-muted transition-colors duration-300 group-hover:text-ink-foreground/60">
-                {entry.period}
-              </p>
+            <div className="grid gap-1 px-2 py-7 sm:grid-cols-[10rem_1fr_auto] sm:items-baseline sm:gap-6">
+              <p className="text-sm text-muted">{entry.period}</p>
               <div>
                 <h3 className="font-display text-xl font-medium sm:text-2xl">
                   {entry.role}
@@ -46,13 +43,9 @@ export default function ExperienceTimeline() {
                     </span>
                   )}
                 </h3>
-                <p className="mt-1 text-muted transition-colors duration-300 group-hover:text-ink-foreground/60">
-                  {entry.company}
-                </p>
+                <p className="mt-1 text-muted">{entry.company}</p>
               </div>
-              <p className="hidden text-sm text-muted transition-colors duration-300 group-hover:text-ink-foreground/60 sm:block">
-                {entry.location}
-              </p>
+              <p className="hidden text-sm text-muted sm:block">{entry.location}</p>
             </div>
           </motion.li>
         ))}
