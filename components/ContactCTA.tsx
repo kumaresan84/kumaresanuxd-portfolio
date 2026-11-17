@@ -64,7 +64,7 @@ export default function ContactCTA() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.1, ease }}
-          className="mt-16 grid grid-cols-2 gap-y-10 gap-x-8 border-t border-ink-foreground/15 pt-10 sm:grid-cols-4"
+          className="mt-16 grid grid-cols-2 gap-y-10 gap-x-8 border-t border-ink-foreground/15 pt-10 sm:flex sm:justify-between"
         >
           <Column label="Email">
             <a
