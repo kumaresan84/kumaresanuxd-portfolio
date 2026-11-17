@@ -31,12 +31,10 @@ function FeaturedCard({ project }: { project: Project }) {
     >
       <Link
         href={`/projects/${project.slug}`}
-        className="group block overflow-hidden rounded-3xl border border-border bg-surface p-3 sm:p-4"
+        className="group block overflow-hidden rounded-3xl border border-border bg-surface p-3 transition-transform duration-300 ease-out hover:-translate-y-[3px] sm:p-4"
       >
         <div className="overflow-hidden rounded-2xl">
-          <div className="transform-gpu backface-hidden will-change-transform transition-transform duration-500 ease-out group-hover:scale-[1.02]">
-            <ProjectVisual project={project} className="aspect-[950/622]" />
-          </div>
+          <ProjectVisual project={project} className="aspect-[950/622]" />
         </div>
         <div className="flex items-start justify-between gap-4 px-2 pb-1 pt-5 sm:px-3">
           <div>
@@ -63,12 +61,10 @@ function GridCard({ project, i }: { project: Project; i: number }) {
     >
       <Link
         href={`/projects/${project.slug}`}
-        className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-surface p-3"
+        className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-surface p-3 transition-transform duration-300 ease-out hover:-translate-y-[3px]"
       >
         <div className="overflow-hidden rounded-2xl">
-          <div className="transform-gpu backface-hidden will-change-transform transition-transform duration-500 ease-out group-hover:scale-[1.03]">
-            <ProjectVisual project={project} className="aspect-[4/3]" />
-          </div>
+          <ProjectVisual project={project} className="aspect-[4/3]" />
         </div>
         <div className="flex items-start justify-between gap-3 px-2 pb-1 pt-4">
           <div>
