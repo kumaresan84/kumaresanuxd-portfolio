@@ -10,8 +10,7 @@ export const profile = {
   ],
   resumeHref: "/resume-placeholder.pdf",
   social: [
-    { label: "LinkedIn", href: "https://linkedin.com" },
-    { label: "Behance", href: "https://behance.net" },
-    { label: "Dribbble", href: "https://dribbble.com" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/kumaresan-m-67b87118/" },
+    { label: "X", href: "https://x.com/Kumaresan84" },
   ],
 };

@@ -38,6 +38,7 @@ html.dark {
   --color-ink-foreground: var(--ink-foreground);
   --font-sans: var(--font-inter);
   --font-display: var(--font-fraunces);
+  --font-hand: var(--font-caveat);
 }
 
 body {

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Fraunces } from "next/font/google";
+import { Inter, Fraunces, Caveat } from "next/font/google";
 import SmoothScroll from "@/components/SmoothScroll";
 import { themeInitScript } from "@/components/ThemeToggle";
 import "./globals.css";
@@ -14,6 +14,13 @@ const fraunces = Fraunces({
   variable: "--font-fraunces",
   subsets: ["latin"],
   axes: ["opsz", "SOFT"],
+  display: "swap",
+});
+
+// Handwritten accent font (used for the footer's script word)
+const caveat = Caveat({
+  variable: "--font-caveat",
+  subsets: ["latin"],
   display: "swap",
 });
 
@@ -32,7 +39,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${inter.variable} ${fraunces.variable} h-full antialiased`}
+      className={`${inter.variable} ${fraunces.variable} ${caveat.variable} h-full antialiased`}
     >
       <body className="grain min-h-full font-sans">
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
