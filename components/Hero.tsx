@@ -85,7 +85,7 @@ export default function Hero() {
           transition={{ duration: 1, delay: 0.25, ease }}
           className="order-1 lg:order-2"
         >
-          <div className="mx-auto w-full max-w-md overflow-hidden rounded-2xl bg-[#fdfdfd] lg:max-w-none">
+          <div className="mx-auto w-full max-w-md lg:max-w-none">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/hero-illustration.png"
