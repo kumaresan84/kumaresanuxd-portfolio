@@ -221,58 +221,66 @@ export const projects: Project[] = [
       "Web and mobile applications for a North-American freight brokerage, connecting shippers and carriers for efficient freight movement.",
     blocks: [
       {
-        type: "prose",
-        body: [
-          "The client is the innovation leader in truck brokerage and less-than-truckload freight transportation — a leading supply chain partner to blue-chip companies across every major industry, with a sole focus on freight transportation. Their global network of 749 locations and approximately 43,000 employees helps shippers manage their supply chains most efficiently, using advanced technology for the movement of goods.",
+        type: "metaBar",
+        items: [
+          { label: "Role", value: "Lead UX / UI Designer" },
+          { label: "Platform", value: "Web · iOS · Android" },
+          { label: "Domain", value: "Freight & Logistics" },
+          { label: "Scope", value: "Research → UI → Handoff" },
         ],
       },
       {
         type: "prose",
-        heading: "Problem Statement",
         body: [
-          "The system needs to provide a comfortable, secure, and easy business-process model for both shippers and carriers — which requires a well-defined, strong fundamental UX to build and run the set of applications that serve best-in-class service for large, medium, and small-scale shippers, carriers, and fleet owners.",
-          "The customer service portal wanted a simple, easy-to-use application for its business partners and customers — getting a quick quote, finding the best carrier partner, and placing and tracking the order until the shipment completes. The carrier portal needed a well-designed, intelligently-suggesting load board that keeps carriers engaged and supports the business.",
+          "A freight marketplace that connects shippers and carriers across North America. The client is an innovation leader in truck brokerage and less-than-truckload transportation — a supply-chain partner to blue-chip companies, with a network of roughly 749 locations and 43,000 employees moving goods through advanced technology.",
+        ],
+      },
+      {
+        type: "prose",
+        heading: "The Challenge",
+        body: [
+          "Two very different audiences lived on the same platform and needed completely different things. Shippers wanted a fast, secure way to get a quote, find the right carrier, and track an order to delivery. Carriers wanted an intelligent load board that surfaced well-paying loads near them and kept them coming back.",
+          "The job was a strong, shared UX foundation that could serve large, medium and small shippers, carriers and fleet owners — consistently across web and mobile.",
         ],
       },
       {
         type: "labeled",
-        heading: "The Users",
+        heading: "Two sides of one marketplace",
         items: [
-          { label: "Shippers", body: "who wanted to ship their commodities from one place to another." },
-          { label: "Carriers", body: "who own one or multiple trucks and provide the support to make the shipment happen." },
+          { label: "Shippers", body: "Businesses moving commodities from one place to another — after a quick quote, the right carrier, and visibility until the shipment lands." },
+          { label: "Carriers", body: "Owner-operators and fleets providing the trucks — after high-paying loads in their area, booked with as little friction as possible." },
         ],
       },
       {
-        type: "bullets",
-        heading: "The Solution",
-        items: [
-          "Defined a UX solution by conducting research and analysis, creating user personas, defining user journeys, developing information architecture, designing wireframes and prototypes, conducting usability testing, implementing the solution, and iterating as necessary.",
-          "Through this process, created a comprehensive UX solution that met the users' needs and delivered a positive experience.",
-        ],
+        type: "process",
+        heading: "Approach",
+        note: "Grounded in research, then carried from personas and journeys all the way to a tested, developer-ready UI.",
+        steps: ["Research", "Personas", "Journeys", "IA", "Wireframes", "Prototype", "Usability Test", "Handoff"],
       },
       {
         type: "meta",
         heading: "Deliverables",
-        body: "User Personas, Information Architecture, User Flow Diagram, Experience Canvas, Low-Fidelity Wireframes, High-Fidelity Mock-up screens, Interactive Prototypes.",
+        body: "User Personas, Information Architecture, User Flow Diagrams, Experience Canvas, Low-Fidelity Wireframes, High-Fidelity Mockups, Interactive Prototypes.",
       },
       {
-        type: "bullets",
-        heading: "Differentiators",
-        items: [
-          "Customers were able to find the best quote in the market through the improved design solution and experience.",
-          "Carriers were able to find the best loads in their geo-location — ones that pay well, without a lot of strain — through the web and mobile applications.",
+        type: "feature",
+        label: "The Solution",
+        layout: "wide",
+        title: "One platform, from desk to cab",
+        body: [
+          "Shippers get a clean web portal to re-order in a tap, compare truckload rates, and watch shipments move on a live map. Carriers get a mobile load board that ranks loads by pay and proximity, books in a couple of taps, and tracks every active haul — so the best work is always the easiest to find.",
         ],
+        images: ["/projects/logistics-app/screen-1.png"],
       },
       {
-        type: "bullets",
+        type: "impact",
         heading: "Outcome",
         items: [
-          "Remarkable business impact in terms of revenue shift.",
-          "Increased volume of shippers and carriers onboarding.",
-          "Top user-ranked carrier mobile application on both iOS and Android.",
+          { stat: "Revenue shift", label: "a remarkable business impact once the redesigned quoting and booking flows went live." },
+          { stat: "More sign-ups", label: "higher volumes of shippers and carriers onboarding onto the platform." },
+          { stat: "#1 carrier app", label: "the carrier mobile app ranked top by users on both iOS and Android." },
         ],
       },
-      { type: "gallery", heading: "Design Screens", note: "Drop any images (except cover.*) into public/projects/logistics-app/", layout: "grid" },
     ],
   },
   {
@@ -285,22 +293,113 @@ export const projects: Project[] = [
       "A web platform to create and manage mobile surveys, and run them across devices with large groups of users.",
     blocks: [
       {
-        type: "prose",
-        heading: "Problem Statement",
-        body: [
-          "Companies need a single platform to create, distribute, and manage mobile surveys — reaching large, distributed groups of respondents across a range of devices, while keeping authoring simple and results easy to analyse.",
+        type: "metaBar",
+        items: [
+          { label: "Role", value: "Lead UX / UI Designer" },
+          { label: "Platform", value: "Web Admin · Mobile App" },
+          { label: "Domain", value: "SaaS · Survey Tech" },
+          { label: "Scope", value: "Flows → UI → Handoff" },
         ],
       },
       {
         type: "prose",
-        heading: "Design Solution",
         body: [
-          "Designed an admin platform that lets teams build surveys visually, push them to targeted device groups, and turn incoming responses into clear, actionable analytics — from questionnaire authoring, through live monitoring, to reporting.",
+          "A web platform to create, distribute and manage mobile surveys at scale — authoring questionnaires, pushing them to targeted device groups, and turning incoming responses into clear, actionable analytics.",
         ],
       },
-      { type: "gallery", heading: "Wireframes", match: "wireframe", note: "Name files wireframe-1.png, wireframe-2.png… in public/projects/mobile-survey-admin-system/", layout: "grid" },
-      { type: "gallery", heading: "Visual Designs", match: "visual", note: "Name files visual-1.png… in the same folder", layout: "grid" },
-      { type: "gallery", heading: "Mobile Designs", match: "mobile", note: "Name files mobile-1.png… in the same folder", layout: "grid" },
+      {
+        type: "prose",
+        heading: "The Challenge",
+        body: [
+          "One platform had to do three jobs well for very different moments: let a team build a survey without touching code, reach large and widely-distributed groups of respondents across a range of devices, and make the results that flood back easy to read and act on.",
+          "The hard part was keeping authoring genuinely simple while the system underneath stayed powerful — logic, targeting, device groups and analytics all in reach without overwhelming the person building a questionnaire.",
+        ],
+      },
+      {
+        type: "process",
+        heading: "Approach",
+        note: "From flows and grayscale wireframes through to a full visual system and developer handoff.",
+        steps: ["Flows", "Wireframes", "Visual Design", "Prototype", "Handoff"],
+      },
+      {
+        type: "gallery",
+        heading: "Wireframes",
+        images: [
+          "/projects/mobile-survey-admin-system/wireframe-1.png",
+          "/projects/mobile-survey-admin-system/wireframe-2.png",
+          "/projects/mobile-survey-admin-system/wireframe-4.png",
+          "/projects/mobile-survey-admin-system/wireframe-5.png",
+        ],
+        layout: "grid",
+      },
+      {
+        type: "prose",
+        heading: "The Solution",
+        body: [
+          "The platform is organised around the lifecycle of a survey — build it, manage it, send it, and answer it — each step designed so the complex part stays out of the way until it's needed.",
+        ],
+      },
+      {
+        type: "feature",
+        label: "Author",
+        layout: "side",
+        title: "Build a survey, visually",
+        body: [
+          "A visual questionnaire builder lets teams assemble questions, set response types and add branching logic directly on the canvas — no code, no spreadsheets. Empty states guide the first question, so a blank project never feels intimidating.",
+        ],
+        images: ["/projects/mobile-survey-admin-system/visual-2.png"],
+      },
+      {
+        type: "feature",
+        label: "Manage",
+        layout: "side",
+        flip: true,
+        title: "Every project in one place",
+        body: [
+          "A clear project workspace keeps surveys, status and ownership legible at a glance — so teams running many studies at once always know what's live, what's draft, and what needs attention.",
+        ],
+        images: ["/projects/mobile-survey-admin-system/visual-4.png"],
+      },
+      {
+        type: "feature",
+        label: "Distribute",
+        layout: "side",
+        title: "Publish to the right devices",
+        body: [
+          "Surveys are pushed to targeted device groups, so the right respondents get the right questionnaire — the moment where a tool for a handful of testers becomes a platform for large, distributed audiences.",
+        ],
+        images: ["/projects/mobile-survey-admin-system/visual-9.png"],
+      },
+      {
+        type: "feature",
+        label: "Respond",
+        layout: "wide",
+        title: "In the respondent's hands",
+        body: [
+          "On the other end, the companion mobile app makes answering effortless — a focused, one-question-at-a-time flow that works for large groups out in the field, not just at a desk.",
+        ],
+        images: ["/projects/mobile-survey-admin-system/Mobile-1.png"],
+      },
+      {
+        type: "gallery",
+        heading: "More of the system",
+        images: [
+          "/projects/mobile-survey-admin-system/visual-1.png",
+          "/projects/mobile-survey-admin-system/visual-6.png",
+          "/projects/mobile-survey-admin-system/visual-8.png",
+          "/projects/mobile-survey-admin-system/visual-10.png",
+        ],
+        layout: "grid",
+      },
+      {
+        type: "impact",
+        heading: "Outcome",
+        items: [
+          { stat: "One platform", label: "authoring, distribution and analytics unified instead of stitched across tools." },
+          { stat: "Any device", label: "surveys reach large, distributed respondent groups across a range of devices." },
+          { stat: "Web + mobile", label: "admin on the web, responses on mobile — one connected system." },
+        ],
+      },
     ],
   },
   {
@@ -313,27 +412,103 @@ export const projects: Project[] = [
       "A web application for the pharmaceutical domain to project the growth and scope of the industry over time, using predefined inputs and formulas.",
     blocks: [
       {
-        type: "prose",
-        heading: "Problem Statement",
-        body: [
-          "Design a web application for a pharmaceutical domain to project the growth and scope of the pharma industry over a period of time, using a set of predefined value inputs and formulas.",
+        type: "metaBar",
+        items: [
+          { label: "Role", value: "Lead UX / UI Designer" },
+          { label: "Platform", value: "Web Application" },
+          { label: "Domain", value: "Pharma · Forecasting" },
+          { label: "Scope", value: "Paper → UI → Prototype" },
         ],
       },
       {
         type: "prose",
-        heading: "The Solution",
         body: [
-          "Designed the web application by understanding the projection inputs, formulas and expectations. The design focused on simplifying the projection-calculation flow experience and providing better visual suggestions.",
+          "A web application for the pharmaceutical domain that projects the growth and scope of the industry over time — turning a set of predefined inputs and formulas into forecasts teams can actually reason about.",
+        ],
+      },
+      {
+        type: "prose",
+        heading: "The Challenge",
+        body: [
+          "Forecasting here isn't one number — it's datasets, reconciliation, segmentation and formula-heavy projections, each feeding the next. Done wrong, that becomes an intimidating wall of tables and fields.",
+          "The goal was to simplify the projection-calculation flow and give it a clear visual language, so analysts could move from raw data to a defensible forecast without losing the thread.",
         ],
       },
       {
         type: "meta",
         heading: "Deliverables",
-        body: "User Personas, Information Architecture, User Flow Diagram, Low-Fidelity Wireframes, High-Fidelity Mock-up screens, Interactive Prototypes.",
+        body: "User Personas, Information Architecture, User Flow Diagrams, Paper Sketches, Low-Fidelity Wireframes, High-Fidelity Mockups, Interactive Prototypes.",
       },
-      { type: "gallery", heading: "Paper Sketches", match: "sketch", note: "Name files sketch-1.png… in public/projects/forecasting-in-pharma/", layout: "grid" },
-      { type: "gallery", heading: "Wireframes", match: "wireframe", note: "Name files wireframe-1.png… in the same folder", layout: "grid" },
-      { type: "gallery", heading: "Design Screens", match: "screen", note: "Name files screen-1.png… in the same folder", layout: "grid" },
+      {
+        type: "feature",
+        label: "Process · 01 Paper",
+        layout: "wide",
+        title: "Thinking it through on paper",
+        body: [
+          "A formula-driven product lives or dies on its structure, so the work started in a notebook — sketching how datasets, segments and projections connect before a pixel was placed. Cheap to draw, cheap to throw away.",
+        ],
+        images: ["/projects/forecasting-in-pharma/sketch-1.png"],
+      },
+      {
+        type: "feature",
+        label: "Process · 02 Wireframe",
+        layout: "wide",
+        title: "Pressure-testing the flow in grayscale",
+        body: [
+          "The sketches became mid-fidelity wireframes to settle the hard parts — data filtering, the dataset structure, the segmentation tree and inline commenting — in black and white, where layout and logic could be judged without colour getting a vote.",
+        ],
+        images: [
+          "/projects/forecasting-in-pharma/wireframe-1.png",
+          "/projects/forecasting-in-pharma/wireframe-4.png",
+        ],
+      },
+      {
+        type: "prose",
+        heading: "The Solution — FORESIGHT",
+        body: [
+          "The final product, FORESIGHT, walks analysts through a clear workflow: define the data, reconcile it with context, then forecast and report — each stage a distinct, calm step rather than one overwhelming screen.",
+        ],
+      },
+      {
+        type: "feature",
+        label: "01 — Define",
+        layout: "side",
+        title: "Start with clean data",
+        body: [
+          "Analysts import or define a dataset up front, with the structure laid out in a readable table. Getting the inputs right here is what makes every downstream projection trustworthy.",
+        ],
+        images: ["/projects/forecasting-in-pharma/Screen-1.png"],
+      },
+      {
+        type: "feature",
+        label: "02 — Reconcile",
+        layout: "side",
+        flip: true,
+        title: "Reconcile with context, not guesswork",
+        body: [
+          "Data reconciliation sits alongside threaded comments and an activity trail, so the reasoning behind every adjustment stays attached to the numbers — essential when a forecast has to be defended later.",
+        ],
+        images: ["/projects/forecasting-in-pharma/Screen-3.png"],
+      },
+      {
+        type: "feature",
+        label: "03 — Forecast",
+        layout: "side",
+        title: "One home for every forecast",
+        body: [
+          "A module dashboard brings forecasts, portfolios, reports and consolidation together — so an analyst always knows where they are in the process and what's left to do.",
+        ],
+        images: ["/projects/forecasting-in-pharma/Screen-5.png"],
+      },
+      {
+        type: "impact",
+        heading: "Outcome",
+        items: [
+          { stat: "Fewer steps", label: "a simplified projection-calculation flow that cut the friction out of a formula-heavy task." },
+          { stat: "Clearer outputs", label: "a visual language that makes dense forecasts readable and comparable." },
+          { stat: "Full workflow", label: "define → reconcile → forecast → report, unified in one application." },
+        ],
+      },
     ],
   },
   // ─────────────────────────────── Icon Designs ───────────────────────────────
@@ -347,12 +522,20 @@ export const projects: Project[] = [
       "A 120+ piece icon system for a SaaS product family — a consistent grid, stroke, and metaphor language across web and mobile.",
     blocks: [
       {
+        type: "metaBar",
+        items: [
+          { label: "Role", value: "UI / Icon Designer" },
+          { label: "Discipline", value: "Iconography" },
+          { label: "System", value: "24px grid · single stroke" },
+          { label: "Scale", value: "120+ icons" },
+        ],
+      },
+      {
         type: "prose",
         body: [
           "A cohesive icon system built on a shared 24px grid with consistent stroke weight and corner treatment, so every glyph reads as part of one family across product surfaces.",
         ],
       },
-      { type: "gallery", heading: "The Set", note: "Real icons coming — drop images into public/projects/product-icon-suite/", layout: "grid" },
     ],
   },
   {
@@ -365,12 +548,20 @@ export const projects: Project[] = [
       "A dual-style icon library — filled glyphs and 1.5px line — on a 24px grid with pixel-perfect exports for design systems.",
     blocks: [
       {
+        type: "metaBar",
+        items: [
+          { label: "Role", value: "UI / Icon Designer" },
+          { label: "Discipline", value: "Iconography" },
+          { label: "System", value: "24px grid · dual-style" },
+          { label: "Output", value: "Pixel-perfect SVG" },
+        ],
+      },
+      {
         type: "prose",
         body: [
           "Two matched styles — solid glyph and 1.5px line — drawn on the same grid so teams can mix weights without breaking visual rhythm, exported pixel-perfect for handoff.",
         ],
       },
-      { type: "gallery", heading: "The Library", note: "Real icons coming — drop images into public/projects/glyph-line-icon-library/", layout: "grid" },
     ],
   },
 
@@ -385,12 +576,20 @@ export const projects: Project[] = [
       "A personal series of hand-drawn characters — expressive figures and creatures exploring shape language and personality.",
     blocks: [
       {
+        type: "metaBar",
+        items: [
+          { label: "Role", value: "Illustrator" },
+          { label: "Discipline", value: "Character Design" },
+          { label: "Medium", value: "Hand-drawn" },
+          { label: "Status", value: "Ongoing series" },
+        ],
+      },
+      {
         type: "prose",
         body: [
           "An ongoing personal practice — character studies exploring expression, silhouette, and personality, from quick sketches to finished pieces.",
         ],
       },
-      { type: "gallery", heading: "Gallery", note: "Real artwork coming — drop images into public/projects/character-illustrations/", layout: "grid" },
     ],
   },
   {
@@ -403,12 +602,20 @@ export const projects: Project[] = [
       "Digital paintings and poster experiments — studies in colour, light, and composition from sketch to final render.",
     blocks: [
       {
+        type: "metaBar",
+        items: [
+          { label: "Role", value: "Illustrator" },
+          { label: "Discipline", value: "Digital Painting" },
+          { label: "Medium", value: "Digital" },
+          { label: "Focus", value: "Colour · light · composition" },
+        ],
+      },
+      {
         type: "prose",
         body: [
           "Painting studies and poster experiments — playing with colour, light, and mood, from loose underpainting to a finished render.",
         ],
       },
-      { type: "gallery", heading: "Gallery", note: "Real artwork coming — drop images into public/projects/digital-paintings/", layout: "grid" },
     ],
   },
 
@@ -423,9 +630,18 @@ export const projects: Project[] = [
       "A playable Ping-Pong game designed entirely in Figma using variables and advanced prototyping logic.",
     blocks: [
       {
+        type: "metaBar",
+        items: [
+          { label: "Role", value: "Product Designer" },
+          { label: "Tool", value: "Figma" },
+          { label: "Technique", value: "Variables · prototyping" },
+          { label: "Type", value: "Playable prototype" },
+        ],
+      },
+      {
         type: "prose",
-        heading: "Problem Statement",
-        body: ["Design a Ping-Pong game in Figma using Variables and advanced prototyping logic."],
+        heading: "The Challenge",
+        body: ["Design a fully playable Ping-Pong game inside Figma alone — using Variables and advanced prototyping logic, no code."],
       },
       {
         type: "labeled",
@@ -437,7 +653,6 @@ export const projects: Project[] = [
           { label: "Score", body: "Set a number & text variable to count and display the score on the board." },
         ],
       },
-      { type: "gallery", heading: "The Prototype", note: "Game mockup coming — drop images into public/projects/ping-pong-game/", layout: "single" },
     ],
   },
   {
@@ -450,12 +665,20 @@ export const projects: Project[] = [
       "A prototype playground for button states, transitions, and delight moments — testing how far small motion can carry an experience.",
     blocks: [
       {
+        type: "metaBar",
+        items: [
+          { label: "Role", value: "Interaction Designer" },
+          { label: "Discipline", value: "Motion" },
+          { label: "Tool", value: "Figma · Prototype" },
+          { label: "Focus", value: "States · transitions" },
+        ],
+      },
+      {
         type: "prose",
         body: [
           "Small, self-contained motion studies — hover states, transitions, and delight moments — exploring how much a little movement can add to an interface.",
         ],
       },
-      { type: "gallery", heading: "The Experiments", note: "Clips coming — drop images into public/projects/micro-interaction-experiments/", layout: "grid" },
     ],
   },
 ];
