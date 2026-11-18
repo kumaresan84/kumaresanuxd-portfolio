@@ -77,6 +77,42 @@ function Gallery({
   );
 }
 
+/** A clickable, framed design screenshot that opens the lightbox. */
+function Shot({
+  src,
+  alt,
+  onOpen,
+  priority,
+}: {
+  src: string;
+  alt: string;
+  onOpen: (src: string) => void;
+  priority?: boolean;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={() => onOpen(src)}
+      aria-label={`Open ${alt} in full view`}
+      className="group relative block w-full cursor-zoom-in overflow-hidden rounded-2xl border border-border bg-surface"
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={src}
+        alt={alt}
+        className="w-full"
+        loading={priority ? "eager" : "lazy"}
+        decoding="async"
+      />
+      <span className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:bg-background/20 group-hover:opacity-100">
+        <span className="flex h-11 w-11 items-center justify-center rounded-full border border-border bg-surface/90 text-foreground backdrop-blur">
+          <Maximize2 size={18} />
+        </span>
+      </span>
+    </button>
+  );
+}
+
 function Block({
   block,
   slug,
@@ -87,6 +123,106 @@ function Block({
   onOpen: (src: string) => void;
 }) {
   switch (block.type) {
+    case "metaBar":
+      return (
+        <section className="mt-10">
+          <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-4">
+            {block.items.map((it) => (
+              <div key={it.label} className="bg-surface p-5">
+                <dt className="text-xs uppercase tracking-[0.15em] text-muted">{it.label}</dt>
+                <dd className="mt-1.5 font-display text-base font-medium">{it.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      );
+
+    case "process":
+      return (
+        <section className="mt-16">
+          <SectionLabel>{block.heading}</SectionLabel>
+          {block.note && <p className="mt-3 max-w-3xl text-muted">{block.note}</p>}
+          <div className="mt-7 flex flex-wrap items-center gap-x-2 gap-y-3">
+            {block.steps.map((step, i) => (
+              <span key={step} className="flex items-center gap-2">
+                <span className="rounded-full border border-border bg-surface px-4 py-2 text-sm font-medium">
+                  {step}
+                </span>
+                {i < block.steps.length - 1 && (
+                  <ArrowRight size={14} className="text-muted/50" aria-hidden />
+                )}
+              </span>
+            ))}
+          </div>
+        </section>
+      );
+
+    case "feature": {
+      const wide = (block.layout ?? "wide") === "wide";
+      const header = (
+        <div>
+          {block.label && <SectionLabel>{block.label}</SectionLabel>}
+          <h2 className={`${block.label ? "mt-3" : ""} font-display text-2xl font-medium tracking-tight sm:text-3xl`}>
+            {block.title}
+          </h2>
+          {block.body.map((p, i) => (
+            <p key={i} className="mt-4 text-lg leading-relaxed text-muted">
+              {p}
+            </p>
+          ))}
+        </div>
+      );
+
+      if (wide) {
+        return (
+          <motion.section {...reveal} className="mt-20">
+            <div className="max-w-3xl">{header}</div>
+            <div className="mt-8 space-y-5">
+              {block.images.map((src) => (
+                <Shot key={src} src={src} alt={block.title} onOpen={onOpen} />
+              ))}
+            </div>
+          </motion.section>
+        );
+      }
+
+      return (
+        <motion.section
+          {...reveal}
+          className="mt-20 grid items-center gap-10 lg:grid-cols-2"
+        >
+          <div className={block.flip ? "lg:order-2" : ""}>{header}</div>
+          <div className={`space-y-5 ${block.flip ? "lg:order-1" : ""}`}>
+            {block.images.map((src) => (
+              <Shot key={src} src={src} alt={block.title} onOpen={onOpen} />
+            ))}
+          </div>
+        </motion.section>
+      );
+    }
+
+    case "impact":
+      return (
+        <section className="mt-20">
+          <SectionLabel>{block.heading}</SectionLabel>
+          <div className="mt-8 grid gap-5 sm:grid-cols-3">
+            {block.items.map((it, i) => (
+              <motion.div
+                key={i}
+                {...reveal}
+                transition={{ ...reveal.transition, delay: i * 0.08 }}
+                className="rounded-2xl border border-border bg-surface p-6"
+              >
+                <p className="font-display text-2xl font-medium text-accent sm:text-3xl">
+                  {it.stat}
+                </p>
+                <p className="mt-3 text-sm leading-relaxed text-muted">{it.label}</p>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+      );
+
     case "prose":
       return (
         <section className="mt-16">
@@ -191,6 +327,9 @@ export default function CaseStudyBody({
       if (b.type === "gallery" && b.images?.length) {
         for (const src of b.images) out.push({ src, section: b.heading });
       }
+      if (b.type === "feature" && b.images?.length) {
+        for (const src of b.images) out.push({ src, section: b.label ?? b.title });
+      }
     }
     return out;
   }, [project.blocks]);
@@ -243,7 +382,7 @@ export default function CaseStudyBody({
         transition={{ duration: 0.8, delay: 0.2, ease }}
         className="mt-12 overflow-hidden rounded-3xl"
       >
-        <ProjectVisual project={project} className="aspect-[16/9]" />
+        <ProjectVisual project={project} className="aspect-[950/622]" />
       </motion.div>
 
       {project.blocks?.map((block, i) => (

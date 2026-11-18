@@ -30,6 +30,26 @@ export type CaseBlock =
   | { type: "bullets"; heading: string; items: string[] }
   | { type: "labeled"; heading: string; items: { label: string; body: string }[] }
   | { type: "meta"; heading: string; body: string }
+  /** Quick-facts bar under the hero (Role, Platform, Domain, Scope…). */
+  | { type: "metaBar"; items: { label: string; value: string }[] }
+  /** Slim horizontal process flow — credibility, not the main content. */
+  | { type: "process"; heading: string; note?: string; steps: string[] }
+  /**
+   * A narrative beat: a heading + copy paired with real design screens.
+   * - "wide": image(s) full-width below the copy (flow map, IA, mobile strip)
+   * - "side": copy and image side-by-side; `flip` puts the image on the left
+   */
+  | {
+      type: "feature";
+      label?: string;
+      title: string;
+      body: string[];
+      images: string[];
+      layout?: "wide" | "side";
+      flip?: boolean;
+    }
+  /** Outcome strip — qualitative result statements. */
+  | { type: "impact"; heading: string; items: { stat: string; label: string }[] }
   | {
       type: "gallery";
       heading: string;
@@ -69,37 +89,126 @@ export const projects: Project[] = [
       "A web and mobile application for a medical university to build the curriculum and conduct classes, both online and offline.",
     blocks: [
       {
+        type: "metaBar",
+        items: [
+          { label: "Role", value: "Lead UX / UI Designer" },
+          { label: "Platform", value: "Web · iOS · Android" },
+          { label: "Domain", value: "Medical Education" },
+          { label: "Scope", value: "Research → UI → Handoff" },
+        ],
+      },
+      {
         type: "prose",
         body: [
-          "Develop a web and mobile application for a medical university to streamline classroom activities. The application empowers staff to prepare and conduct classes more efficiently, while enabling students to join, participate, and digitally track their overall progress.",
+          "A web and mobile application for a medical university to streamline classroom activities — empowering staff to prepare and conduct classes more efficiently, and enabling students to join, participate, and digitally track their overall progress.",
         ],
       },
       {
-        type: "labeled",
-        heading: "UX Process",
-        items: [
-          { label: "Empathise", body: "Conducted user interviews with staff & students, and observed current classes to understand needs and pain points." },
-          { label: "Define", body: "Refined the problem statement and created user personas for staff and students." },
-          { label: "Ideate", body: "Brainstormed features and created low-fidelity prototypes for the core functionalities." },
-          { label: "Prototype", body: "Developed mid-fidelity prototypes for usability testing." },
-          { label: "Test", body: "Conducted usability testing with staff & students, iterating on the design based on feedback." },
-          { label: "Design", body: "Created high-fidelity prototypes and a style guide." },
-          { label: "Develop & Launch", body: "Handed off the design, and tested over the developed web and mobile apps." },
+        type: "prose",
+        heading: "The Challenge",
+        body: [
+          "Classroom life was scattered across disconnected tools — slides in one place, attendance on paper, quizzes improvised on the spot, and feedback lost the moment class ended. Nothing linked preparation, live teaching, and follow-up, and students had no single view of where they stood.",
+          "The brief: design one system that works both online and offline, for two very different users — busy faculty preparing and running sessions, and students trying to keep up and track their progress.",
         ],
       },
       {
-        type: "labeled",
-        heading: "Solution",
-        items: [
-          { label: "Pre-Class Preparation", body: "Prepare and share lecture materials and activities, and run pre-class assessments to enhance student engagement." },
-          { label: "Interactive Classroom", body: "Take digital attendance with the mobile app and run in-class quizzes or polls to boost participation and real-time feedback." },
-          { label: "Personalised Learning", body: "Assign personalised assignments to students and leverage the app for evaluation and performance analysis to optimise learning outcomes." },
+        type: "process",
+        heading: "Approach",
+        note: "A full design-thinking pass — field research through to developer handoff — kept lightweight so the product story, not the process, stays in focus.",
+        steps: ["Empathise", "Define", "Ideate", "Prototype", "Test", "Design", "Handoff"],
+      },
+      {
+        type: "meta",
+        heading: "Deliverables",
+        body: "User Personas, Mind-map, Information Architecture, User Flows, Low-Fidelity Wireframes, High-Fidelity Mockups, Interactive Prototypes, Style Guide.",
+      },
+      {
+        type: "feature",
+        label: "Discovery",
+        layout: "wide",
+        title: "Mapping the whole classroom journey",
+        body: [
+          "Interviews with staff and students, plus observing live classes, surfaced every task a class actually touches. I captured it as a single mind-map — from preparing lectures to taking attendance, running in-class activities, and evaluating performance — so the team could see the full scope before a single screen was drawn.",
+        ],
+        images: [oc(1)],
+      },
+      {
+        type: "feature",
+        label: "Information Architecture",
+        layout: "wide",
+        title: "Giving the product a backbone",
+        body: [
+          "The mind-map became a clear structure: what lives in the web app for preparation and evaluation, what belongs on mobile for in-the-moment actions, and how the staff and student journeys branch from one shared core.",
+        ],
+        images: [oc(2)],
+      },
+      {
+        type: "prose",
+        heading: "The Solution",
+        body: [
+          "Rather than a feature list, the design is organised around the three moments that matter most in a class — before it starts, while it runs, and after it ends.",
         ],
       },
-      { type: "gallery", heading: "Mind-map", images: [oc(1)], layout: "single" },
-      { type: "gallery", heading: "Information Architecture", images: [oc(2)], layout: "single" },
-      { type: "gallery", heading: "User Test — Response", images: [oc(6)], layout: "single" },
-      { type: "gallery", heading: "Design Screens", images: [oc(4), oc(5), oc(3), oc(7)], layout: "grid" },
+      {
+        type: "feature",
+        label: "01 — Before class",
+        layout: "side",
+        title: "Prepare once, teach anywhere",
+        body: [
+          "A single dashboard pulls together the next session, course progress, pending documents and announcements. Staff upload lecture materials and set pre-class assessments ahead of time, so students arrive already primed — and so nothing has to be assembled live in the room.",
+        ],
+        images: [oc(3)],
+      },
+      {
+        type: "feature",
+        label: "02 — In the classroom",
+        layout: "side",
+        flip: true,
+        title: "Turn a lecture into a conversation",
+        body: [
+          "Recorded sessions, attached documents and threaded Q&A all live on one lecture page. Digital attendance and in-class quizzes or polls keep students active and give staff real-time feedback on who is actually following along — online or in the room.",
+        ],
+        images: [oc(4)],
+      },
+      {
+        type: "feature",
+        label: "03 — After class",
+        layout: "side",
+        title: "Personalised follow-up & progress",
+        body: [
+          "Assignments are tailored to each student, and live quiz results feed straight into evaluation and performance analysis. The loop closes: both staff and students can see progress build up over time, instead of it vanishing when the bell rings.",
+        ],
+        images: [oc(5)],
+      },
+      {
+        type: "feature",
+        label: "On mobile",
+        layout: "wide",
+        title: "The classroom in their pocket",
+        body: [
+          "The companion app keeps the essentials one tap away — joining a session, marking attendance, answering live quizzes, and checking documents and announcements — and holds up whether the connection does or not.",
+        ],
+        images: [oc(7)],
+      },
+      {
+        type: "feature",
+        label: "Validation",
+        layout: "wide",
+        title: "Tested with the people who'd use it",
+        body: [
+          "Usability sessions with staff and students shaped the final flows. Structured response analysis flagged exactly where attendance and task instructions were unclear, and the designs were iterated until those paths became obvious.",
+        ],
+        images: [oc(6)],
+      },
+      {
+        type: "impact",
+        heading: "Outcome",
+        items: [
+          { stat: "One system", label: "replaced scattered slides, paper attendance and ad-hoc quizzes with a single connected flow." },
+          { stat: "Web + 2 apps", label: "designed and handed off for web, iOS and Android from one source of truth." },
+          { stat: "Online + offline", label: "the same curriculum runs either way, so a dropped connection never stops a class." },
+        ],
+      },
     ],
   },
   {
