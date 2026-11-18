@@ -380,7 +380,7 @@ export default function CaseStudyBody({
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2, ease }}
-        className="mt-12 overflow-hidden rounded-3xl"
+        className="mt-12 overflow-hidden rounded-3xl border border-border"
       >
         <ProjectVisual project={project} className="aspect-[950/622]" />
       </motion.div>
