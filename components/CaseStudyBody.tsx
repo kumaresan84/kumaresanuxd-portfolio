@@ -313,12 +313,10 @@ function Block({
 
 export default function CaseStudyBody({
   project,
-  prevProject,
-  nextProject,
+  moreProjects = [],
 }: {
   project: Project;
-  prevProject?: Project;
-  nextProject?: Project;
+  moreProjects?: Project[];
 }) {
   // Flat list of every gallery image, in page order, for the lightbox to page through.
   const allImages = useMemo<LightboxImage[]>(() => {
@@ -389,32 +387,38 @@ export default function CaseStudyBody({
         <Block key={i} block={block} slug={project.slug} onOpen={openSrc} />
       ))}
 
-      <div className="mt-24 flex items-center justify-between gap-6 border-t border-border pt-8">
-        {prevProject ? (
-          <Link href={`/projects/${prevProject.slug}`} className="group">
-            <p className="flex items-center gap-2 text-sm text-muted">
-              <ArrowLeft size={14} className="transition-transform group-hover:-translate-x-0.5" />
-              Previous
-            </p>
-            <p className="mt-1 font-display text-lg font-medium transition-colors group-hover:text-accent">
-              {prevProject.title}
-            </p>
-          </Link>
-        ) : (
-          <span />
-        )}
-        {nextProject && (
-          <Link href={`/projects/${nextProject.slug}`} className="group text-right">
-            <p className="flex items-center justify-end gap-2 text-sm text-muted">
-              Next
+      {moreProjects.length > 0 && (
+        <section className="mt-24 border-t border-border pt-12">
+          <div className="flex items-baseline justify-between gap-4">
+            <h2 className="font-display text-xl font-medium sm:text-2xl">More projects</h2>
+            <Link
+              href="/#work"
+              className="group inline-flex items-center gap-1 text-sm text-muted transition-colors hover:text-accent"
+            >
+              View all
               <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
-            </p>
-            <p className="mt-1 font-display text-lg font-medium transition-colors group-hover:text-accent">
-              {nextProject.title}
-            </p>
-          </Link>
-        )}
-      </div>
+            </Link>
+          </div>
+
+          <div className="mt-8 grid gap-5 sm:grid-cols-3">
+            {moreProjects.map((p) => (
+              <Link
+                key={p.slug}
+                href={`/projects/${p.slug}`}
+                className="group block transition-transform duration-300 ease-out hover:-translate-y-[3px]"
+              >
+                <div className="overflow-hidden rounded-xl border border-border">
+                  <ProjectVisual project={p} className="aspect-[16/10]" />
+                </div>
+                <p className="mt-3 text-xs uppercase tracking-[0.12em] text-muted">{p.tag}</p>
+                <h3 className="mt-0.5 font-display text-base font-medium transition-colors group-hover:text-accent">
+                  {p.title}
+                </h3>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
 
       <Lightbox
         images={allImages}

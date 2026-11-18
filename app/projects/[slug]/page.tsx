@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { projects, getProject, getProjectsByCategory } from "@/content/projects";
+import { projects, getProject } from "@/content/projects";
 import { hydrateProject } from "@/lib/project-images";
 import CaseStudyBody from "@/components/CaseStudyBody";
 import SiteHeader from "@/components/SiteHeader";
@@ -31,17 +31,17 @@ export default async function ProjectPage({
   const project = getProject(slug);
   if (!project) notFound();
 
-  const siblings = getProjectsByCategory(project.category);
-  const index = siblings.findIndex((p) => p.slug === project.slug);
+  // Rotate through the catalogue so each project page suggests a different trio.
+  const start = projects.findIndex((p) => p.slug === project.slug);
+  const moreProjects = Array.from(
+    { length: Math.min(3, projects.length - 1) },
+    (_, k) => projects[(start + k + 1) % projects.length],
+  ).map(hydrateProject);
 
   return (
     <main className="min-h-screen bg-background">
       <SiteHeader />
-      <CaseStudyBody
-        project={hydrateProject(project)}
-        prevProject={index > 0 ? siblings[index - 1] : undefined}
-        nextProject={index < siblings.length - 1 ? siblings[index + 1] : undefined}
-      />
+      <CaseStudyBody project={hydrateProject(project)} moreProjects={moreProjects} />
     </main>
   );
 }
