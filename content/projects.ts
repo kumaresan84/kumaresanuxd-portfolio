@@ -50,6 +50,8 @@ export type CaseBlock =
     }
   /** Outcome strip — qualitative result statements. */
   | { type: "impact"; heading: string; items: { stat: string; label: string }[] }
+  /** Prominent call-to-action button (e.g. a playable prototype link). */
+  | { type: "cta"; label: string; href: string; note?: string }
   | {
       type: "gallery";
       heading: string;
@@ -632,26 +634,83 @@ export const projects: Project[] = [
       {
         type: "metaBar",
         items: [
-          { label: "Role", value: "Product Designer" },
-          { label: "Tool", value: "Figma" },
-          { label: "Technique", value: "Variables · prototyping" },
+          { label: "Role", value: "Designer / Prototyper" },
+          { label: "Tool", value: "Figma — no code" },
+          { label: "Technique", value: "Variables · conditional logic" },
           { label: "Type", value: "Playable prototype" },
+        ],
+      },
+      {
+        type: "cta",
+        label: "Play the prototype",
+        href: "https://www.figma.com/proto/s8GT4SRB45uQsTI59rjknG/Portfolio-2024?node-id=590-717&page-id=105%3A68&starting-point-node-id=590%3A683&scaling=contain&content-scaling=fixed",
+        note: "Opens in Figma · use ← / → keys or the on-screen buttons to move the paddle",
+      },
+      {
+        type: "prose",
+        body: [
+          "A fully playable Ping-Pong game built entirely in Figma — no code, no plugins. Variables and conditional prototyping drive real-time ball motion, wall and paddle collisions, live scoring, and a game-over state.",
         ],
       },
       {
         type: "prose",
         heading: "The Challenge",
-        body: ["Design a fully playable Ping-Pong game inside Figma alone — using Variables and advanced prototyping logic, no code."],
+        body: [
+          "Could Figma's prototyping engine — made for screen-to-screen flows — actually run a real-time game? One where a ball moves every frame, bounces off the walls and the paddle, keeps score, and ends the round on a miss, with nothing but variables and conditional interactions.",
+        ],
+      },
+      {
+        type: "feature",
+        label: "The game",
+        layout: "wide",
+        title: "Simple to play, tricky to build",
+        body: [
+          "The ball drops and rallies off a paddle you slide left and right — with the arrow keys or the on-screen buttons. Every clean hit adds to the score; miss, and it's game over. All of it runs live inside a Figma prototype.",
+        ],
+        images: ["/projects/ping-pong-game/gameplay.webp"],
       },
       {
         type: "labeled",
-        heading: "Solution — Components",
+        heading: "Built on variables",
         items: [
-          { label: "Ping-Pong Table", body: "The play surface the whole game runs on." },
-          { label: "The Ball", body: "Set X and Y number variables to position the ball based on racket response and time." },
-          { label: "Racket Bar", body: "Set X and Y number variables to move the bar based on Left/Right keys or arrow-button responses." },
-          { label: "Score", body: "Set a number & text variable to count and display the score on the board." },
+          { label: "Xval · Yval", body: "The ball's live position, nudged 8px on every tick to animate motion." },
+          { label: "fw", body: "Horizontal direction flag — flips the ball back when it reaches the left or right wall." },
+          { label: "Up", body: "Vertical direction flag — flips when the ball hits the ceiling or the paddle." },
+          { label: "left", body: "The paddle's X position, moved in steps and clamped so it can't leave the table." },
+          { label: "Scoreval", body: "The score — adds 10 on every successful paddle hit and updates the board." },
+          { label: "C2 · Game over", body: "Ball colour switches on a hit for feedback; a boolean ends the round on a miss." },
         ],
+      },
+      {
+        type: "prose",
+        heading: "The game loop",
+        body: [
+          "The trick is a one-millisecond \"after delay → navigate to the same frame\" interaction, which turns the prototype into a game loop. Each tick re-evaluates a stack of conditional rules — move the ball, test the walls, test the paddle, update the score — then loops back and runs again, dozens of times a second.",
+        ],
+      },
+      {
+        type: "gallery",
+        heading: "Under the hood",
+        images: [
+          "/projects/ping-pong-game/logic-motion.webp",
+          "/projects/ping-pong-game/logic-score.webp",
+          "/projects/ping-pong-game/logic-controls.webp",
+        ],
+        layout: "grid",
+      },
+      {
+        type: "impact",
+        heading: "Outcome",
+        items: [
+          { stat: "0 lines of code", label: "a real-time game running purely on Figma variables and conditional prototyping." },
+          { stat: "8 variables", label: "position, direction, paddle, score, colour and state — the whole engine in a handful of values." },
+          { stat: "1ms loop", label: "a self-navigating frame delay doubles as a game loop ticking many times a second." },
+        ],
+      },
+      {
+        type: "cta",
+        label: "Play the prototype",
+        href: "https://www.figma.com/proto/s8GT4SRB45uQsTI59rjknG/Portfolio-2024?node-id=590-717&page-id=105%3A68&starting-point-node-id=590%3A683&scaling=contain&content-scaling=fixed",
       },
     ],
   },

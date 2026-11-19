@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, Maximize2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, Maximize2, Play } from "lucide-react";
 import type { CaseBlock, Project } from "@/content/projects";
 import { ProjectVisual } from "@/components/ProjectCard";
 import Lightbox, { type LightboxImage } from "@/components/Lightbox";
@@ -200,6 +200,23 @@ function Block({
         </motion.section>
       );
     }
+
+    case "cta":
+      return (
+        <section className="mt-10">
+          <a
+            href={block.href}
+            target="_blank"
+            rel="noreferrer"
+            className="group inline-flex items-center gap-2.5 rounded-full bg-accent px-7 py-3.5 text-sm font-medium text-accent-foreground transition-transform duration-300 ease-out hover:-translate-y-[2px]"
+          >
+            <Play size={16} className="fill-current" />
+            {block.label}
+            <ArrowUpRight size={16} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          </a>
+          {block.note && <p className="mt-3 text-sm text-muted">{block.note}</p>}
+        </section>
+      );
 
     case "impact":
       return (
