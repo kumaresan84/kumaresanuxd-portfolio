@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, ArrowUpRight, Maximize2, Play } from "lucide-react";
 import type { CaseBlock, Project } from "@/content/projects";
@@ -113,77 +113,28 @@ function Shot({
   );
 }
 
-/**
- * A live Figma prototype. On pointer-fine devices (desktop) it plays inline in
- * an iframe. On touch devices (iPad / phones) — where an inline embed shows a
- * Figma login bar — it shows a static poster that opens the full-screen player
- * page (same-origin, so a tap can't hand off to the native Figma app) in a new
- * browser tab, where the prototype plays live in the browser.
- */
+/** A live Figma prototype that plays inline in an iframe on every device. */
 function FigmaEmbed({
   block,
 }: {
   block: Extract<CaseBlock, { type: "embed" }>;
 }) {
-  const [canEmbed, setCanEmbed] = useState(false);
-
-  useEffect(() => {
-    const coarse =
-      window.matchMedia?.("(pointer: coarse)")?.matches ||
-      "ontouchstart" in window ||
-      navigator.maxTouchPoints > 0;
-    setCanEmbed(!coarse);
-  }, []);
-
   const embedUrl =
     block.src.replace("https://www.figma.com/", "https://embed.figma.com/") +
     "&embed-host=share";
-  const openHref = block.href ?? block.src;
-  const ratio = block.ratio ?? "4 / 5";
 
   return (
     <div
       className="overflow-hidden rounded-2xl border border-border bg-[#0f0f0f]"
-      style={{ aspectRatio: ratio }}
+      style={{ aspectRatio: block.ratio ?? "4 / 5" }}
     >
-      {canEmbed ? (
-        <iframe
-          src={embedUrl}
-          title={block.title}
-          className="block h-full w-full border-0"
-          allowFullScreen
-          loading="lazy"
-        />
-      ) : (
-        <a
-          href={openHref}
-          target="_blank"
-          rel="noreferrer"
-          className="group relative flex h-full w-full items-center justify-center"
-          aria-label={`Open the ${block.title} prototype in a new tab`}
-        >
-          {block.poster && (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={block.poster}
-              alt={block.title}
-              className="h-full w-full object-contain"
-              loading="lazy"
-              decoding="async"
-            />
-          )}
-          <span className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-background/30 backdrop-blur-[1px]">
-            <span className="flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-medium text-accent-foreground shadow-lg">
-              <Play size={15} className="fill-current" />
-              Open prototype
-              <ArrowUpRight size={15} />
-            </span>
-            <span className="rounded-full bg-background/80 px-3 py-1 text-xs text-muted">
-              Opens the live prototype in a new browser tab
-            </span>
-          </span>
-        </a>
-      )}
+      <iframe
+        src={embedUrl}
+        title={block.title}
+        className="block h-full w-full border-0"
+        allowFullScreen
+        loading="lazy"
+      />
     </div>
   );
 }
@@ -310,20 +261,7 @@ function Block({
           <div className="mt-8">
             <FigmaEmbed block={block} />
           </div>
-          <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
-            {block.note && <p className="text-sm text-muted">{block.note}</p>}
-            {block.href && (
-              <a
-                href={block.href}
-                target="_blank"
-                rel="noreferrer"
-                className="group inline-flex items-center gap-1.5 text-sm font-medium text-accent"
-              >
-                Open full screen
-                <ArrowUpRight size={15} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-              </a>
-            )}
-          </div>
+          {block.note && <p className="mt-3 text-sm text-muted">{block.note}</p>}
         </motion.section>
       );
 

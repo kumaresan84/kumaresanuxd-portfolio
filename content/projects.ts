@@ -740,7 +740,6 @@ export const projects: Project[] = [
     title: "Analog Clock",
     tag: "Figma + Variables",
     gradient: ["#1c2a3a", "#7f8fa6"],
-    coverHref: "/play/analog-clock.html",
     summary:
       "A live analog clock that keeps real time — built with nothing but Figma design, variables, conditional logic, and a plugin loop.",
     blocks: [
@@ -775,8 +774,6 @@ export const projects: Project[] = [
         ],
         src: "https://www.figma.com/proto/2RNRdsPeNoZgIp5HU6kIsl/Ping-Pong---Analog-Clock?node-id=3-1844&t=MTlj06J3K8RDxDGI-1&scaling=contain&content-scaling=fixed&starting-point-node-id=3%3A1844&page-id=0%3A1",
         ratio: "4 / 5",
-        href: "/play/analog-clock.html",
-        poster: "/projects/analog-clock/clock.webp",
         note: "Live Figma prototype — give it a moment to load, then watch it tick.",
       },
       {
