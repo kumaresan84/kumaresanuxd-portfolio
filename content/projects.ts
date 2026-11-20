@@ -534,32 +534,6 @@ export const projects: Project[] = [
   },
   // ─────────────────────────────── Icon Designs ───────────────────────────────
   {
-    slug: "product-icon-suite",
-    category: "icon-designs",
-    title: "Product Icon Suite",
-    tag: "Iconography",
-    gradient: ["#31404f", "#8fb3c9"],
-    summary:
-      "A 120+ piece icon system for a SaaS product family — a consistent grid, stroke, and metaphor language across web and mobile.",
-    blocks: [
-      {
-        type: "metaBar",
-        items: [
-          { label: "Role", value: "UI / Icon Designer" },
-          { label: "Discipline", value: "Iconography" },
-          { label: "System", value: "24px grid · single stroke" },
-          { label: "Scale", value: "120+ icons" },
-        ],
-      },
-      {
-        type: "prose",
-        body: [
-          "A cohesive icon system built on a shared 24px grid with consistent stroke weight and corner treatment, so every glyph reads as part of one family across product surfaces.",
-        ],
-      },
-    ],
-  },
-  {
     slug: "glyph-line-icon-library",
     category: "icon-designs",
     title: "Glyph & Line Icon Library",
@@ -656,32 +630,6 @@ export const projects: Project[] = [
         type: "prose",
         body: [
           "An ongoing personal practice — character studies exploring expression, silhouette, and personality, from quick sketches to finished pieces.",
-        ],
-      },
-    ],
-  },
-  {
-    slug: "digital-paintings",
-    category: "art-graphics",
-    title: "Digital Paintings & Posters",
-    tag: "Art",
-    gradient: ["#4f2f2f", "#c98f8f"],
-    summary:
-      "Digital paintings and poster experiments — studies in colour, light, and composition from sketch to final render.",
-    blocks: [
-      {
-        type: "metaBar",
-        items: [
-          { label: "Role", value: "Illustrator" },
-          { label: "Discipline", value: "Digital Painting" },
-          { label: "Medium", value: "Digital" },
-          { label: "Focus", value: "Colour · light · composition" },
-        ],
-      },
-      {
-        type: "prose",
-        body: [
-          "Painting studies and poster experiments — playing with colour, light, and mood, from loose underpainting to a finished render.",
         ],
       },
     ],
