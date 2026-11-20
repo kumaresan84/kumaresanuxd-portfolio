@@ -50,31 +50,29 @@ function FeaturedCard({ project }: { project: Project }) {
   );
 }
 
-/** Equal-size card used in the standard grid below the featured project. */
-function GridCard({ project, i }: { project: Project; i: number }) {
+/** Compact horizontal card used in the right-hand rail beside the featured project. */
+function SideCard({ project, i }: { project: Project; i: number }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 28 }}
+      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.6, delay: i * 0.08, ease }}
+      transition={{ duration: 0.55, delay: i * 0.08, ease }}
     >
       <Link
         href={`/projects/${project.slug}`}
-        className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-surface p-3 transition-transform duration-300 ease-out hover:-translate-y-[3px]"
+        className="group flex items-center gap-4 rounded-2xl border border-border bg-surface p-3 transition-transform duration-300 ease-out hover:-translate-y-[2px]"
       >
-        <div className="overflow-hidden rounded-2xl">
+        <div className="w-28 shrink-0 overflow-hidden rounded-xl sm:w-36">
           <ProjectVisual project={project} className="aspect-[4/3]" />
         </div>
-        <div className="flex items-start justify-between gap-3 px-2 pb-1 pt-4">
-          <div>
-            <h3 className="font-display text-lg font-medium tracking-tight transition-colors group-hover:text-accent">
-              {project.title}
-            </h3>
-            <p className="mt-1 line-clamp-2 text-sm text-muted">{project.summary}</p>
-          </div>
-          <ArrowBadge size="sm" />
+        <div className="min-w-0 flex-1">
+          <h3 className="font-display text-base font-medium tracking-tight transition-colors group-hover:text-accent sm:text-lg">
+            {project.title}
+          </h3>
+          <p className="mt-1 line-clamp-2 text-sm text-muted">{project.summary}</p>
         </div>
+        <ArrowBadge size="sm" />
       </Link>
     </motion.div>
   );
@@ -110,13 +108,19 @@ export default function ProjectsSection({ projects: allProjects }: { projects: P
       </div>
 
       {featured ? (
-        <div className="mt-14 space-y-6">
-          <FeaturedCard project={featured} />
-          {rest.length > 0 && (
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {rest.map((project, i) => (
-                <GridCard key={project.slug} project={project} i={i} />
-              ))}
+        <div className="mt-10">
+          {rest.length > 0 ? (
+            <div className="grid gap-6 lg:grid-cols-[1.5fr_1fr] lg:items-start">
+              <FeaturedCard project={featured} />
+              <div className="flex flex-col gap-4">
+                {rest.map((project, i) => (
+                  <SideCard key={project.slug} project={project} i={i} />
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div className="mx-auto max-w-3xl">
+              <FeaturedCard project={featured} />
             </div>
           )}
         </div>
