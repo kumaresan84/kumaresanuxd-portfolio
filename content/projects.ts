@@ -566,7 +566,7 @@ export const projects: Project[] = [
     tag: "Iconography",
     gradient: ["#4a3b2e", "#c9a97f"],
     summary:
-      "A dual-style icon library — filled glyphs and 1.5px line — on a 24px grid with pixel-perfect exports for design systems.",
+      "A dual-style icon library — hand-drawn line and matched solid glyphs — built on a consistent 24px grid with precise stroke weights and balanced proportions.",
     blocks: [
       {
         type: "metaBar",
@@ -580,7 +580,54 @@ export const projects: Project[] = [
       {
         type: "prose",
         body: [
-          "Two matched styles — solid glyph and 1.5px line — drawn on the same grid so teams can mix weights without breaking visual rhythm, exported pixel-perfect for handoff.",
+          "A set of hand-crafted icons drawn on a consistent grid — two matched styles, line and solid, with precise stroke weights and balanced proportions, so every glyph reads as part of one family.",
+        ],
+      },
+      {
+        type: "prose",
+        heading: "The Challenge",
+        body: [
+          "Icon sets drift. Stroke weights wander, corners don't match, a circle looks bigger than a square beside it, and a second \"solid\" style never quite lines up with the line one. The goal here was a library with a single voice — two styles that feel drawn by the same hand and snap cleanly into any interface.",
+        ],
+      },
+      {
+        type: "feature",
+        label: "Line",
+        layout: "wide",
+        title: "One stroke, the whole UI",
+        body: [
+          "The line style is the everyday vocabulary — navigation, actions, status, content and media. A single uniform stroke with rounded caps and open counters keeps forty-odd glyphs reading as one set, legible from a 16px tab bar up to a hero illustration.",
+        ],
+        images: ["/projects/glyph-line-icon-library/line-set.webp"],
+      },
+      {
+        type: "feature",
+        label: "Glyph",
+        layout: "wide",
+        title: "Solid, for the small sizes",
+        body: [
+          "A matched solid style for the places line icons get muddy — player controls, dense toolbars, filled states. Each glyph is cut from the same silhouette as its line counterpart, so switching weight never breaks the rhythm.",
+        ],
+        images: ["/projects/glyph-line-icon-library/glyph-set.webp"],
+      },
+      {
+        type: "labeled",
+        heading: "The system",
+        items: [
+          { label: "24px keyline grid", body: "Every icon is drawn inside the same keyline frame with consistent padding, so they sit evenly side by side." },
+          { label: "Uniform stroke", body: "One stroke weight with rounded caps and joins gives the line set a single, steady voice." },
+          { label: "Matched silhouettes", body: "The solid style is built from the same shapes as the line one — a line and glyph of the same icon align pixel for pixel." },
+          { label: "Optical balance", body: "Circular and angular shapes are nudged off the mathematical grid so they look the same size, not just measure it." },
+          { label: "Pixel-perfect export", body: "Snapped to the pixel grid and shipped as clean SVG, ready to drop into a design system or codebase." },
+        ],
+      },
+      {
+        type: "impact",
+        heading: "Outcome",
+        items: [
+          { stat: "2 matched styles", label: "line and solid drawn from the same silhouettes, so teams can mix weights without breaking visual rhythm." },
+          { stat: "One 24px grid", label: "a single keyline system keeps every glyph in optical rhythm across the whole set." },
+          { stat: "65+ icons", label: "a working vocabulary spanning navigation, actions, media and content — and still growing." },
         ],
       },
     ],
