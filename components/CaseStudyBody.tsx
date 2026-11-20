@@ -114,23 +114,11 @@ function Shot({
 }
 
 /**
- * Open a Figma prototype URL in a new browser tab. We trigger it from JS
- * (window.open) rather than a plain <a> tap: on iOS/Android a tapped figma.com
- * link is a "universal link" that launches the installed Figma app, but a
- * JS-opened one stays in the browser — so mobile/tablet gets the same new-tab
- * web experience as desktop instead of being thrown into the app.
- */
-function openProto(href: string) {
-  if (typeof window !== "undefined") {
-    window.open(href, "_blank", "noopener,noreferrer");
-  }
-}
-
-/**
  * A live Figma prototype. On pointer-fine devices (desktop) it plays inline in
  * an iframe. On touch devices (iPad / phones) — where an inline embed shows a
- * Figma login bar and tapping hands off to the native app — it shows a static
- * poster with a button that opens the prototype in a new browser tab instead.
+ * Figma login bar — it shows a static poster that opens the full-screen player
+ * page (same-origin, so a tap can't hand off to the native Figma app) in a new
+ * browser tab, where the prototype plays live in the browser.
  */
 function FigmaEmbed({
   block,
@@ -167,9 +155,10 @@ function FigmaEmbed({
           loading="lazy"
         />
       ) : (
-        <button
-          type="button"
-          onClick={() => openProto(openHref)}
+        <a
+          href={openHref}
+          target="_blank"
+          rel="noreferrer"
           className="group relative flex h-full w-full items-center justify-center"
           aria-label={`Open the ${block.title} prototype in a new tab`}
         >
@@ -193,7 +182,7 @@ function FigmaEmbed({
               Opens the live prototype in a new browser tab
             </span>
           </span>
-        </button>
+        </a>
       )}
     </div>
   );
@@ -294,10 +283,6 @@ function Block({
             href={block.href}
             target="_blank"
             rel="noreferrer"
-            onClick={(e) => {
-              e.preventDefault();
-              openProto(block.href);
-            }}
             className="group inline-flex items-center gap-2.5 rounded-full bg-accent px-7 py-3.5 text-sm font-medium text-accent-foreground transition-transform duration-300 ease-out hover:-translate-y-[2px]"
           >
             <Play size={16} className="fill-current" />
@@ -334,7 +319,7 @@ function Block({
                 rel="noreferrer"
                 className="group inline-flex items-center gap-1.5 text-sm font-medium text-accent"
               >
-                Open in Figma
+                Open full screen
                 <ArrowUpRight size={15} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
               </a>
             )}
@@ -526,10 +511,6 @@ export default function CaseStudyBody({
             href={project.coverHref}
             target="_blank"
             rel="noreferrer"
-            onClick={(e) => {
-              e.preventDefault();
-              openProto(project.coverHref!);
-            }}
             aria-label={`Open the ${project.title} prototype in a new tab`}
             className="group relative block"
           >
