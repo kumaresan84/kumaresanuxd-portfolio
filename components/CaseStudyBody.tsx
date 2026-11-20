@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, ArrowUpRight, Maximize2, Play } from "lucide-react";
 import type { CaseBlock, Project } from "@/content/projects";
@@ -113,28 +113,56 @@ function Shot({
   );
 }
 
-/** A live Figma prototype that plays inline in an iframe on every device. */
+/**
+ * A live Figma prototype that plays inline in an iframe on every device.
+ * Figma can take a few seconds to spin up, so we show a loading state (the
+ * poster still, dimmed, with a spinner) until the embed reports it's loaded —
+ * otherwise the blank frame reads as broken.
+ */
 function FigmaEmbed({
   block,
 }: {
   block: Extract<CaseBlock, { type: "embed" }>;
 }) {
+  const [loaded, setLoaded] = useState(false);
   const embedUrl =
     block.src.replace("https://www.figma.com/", "https://embed.figma.com/") +
     "&embed-host=share";
 
+  // Safety net: Figma's iframe `load` event can be slow or not fire, so reveal
+  // the embed after a few seconds regardless — never leave the overlay stuck.
+  useEffect(() => {
+    const t = setTimeout(() => setLoaded(true), 6000);
+    return () => clearTimeout(t);
+  }, []);
+
   return (
     <div
-      className="overflow-hidden rounded-2xl border border-border bg-[#0f0f0f]"
+      className="relative overflow-hidden rounded-2xl border border-border bg-[#0f0f0f]"
       style={{ aspectRatio: block.ratio ?? "4 / 5" }}
     >
       <iframe
         src={embedUrl}
         title={block.title}
-        className="block h-full w-full border-0"
+        className="relative z-10 block h-full w-full border-0"
         allowFullScreen
-        loading="lazy"
+        onLoad={() => setLoaded(true)}
       />
+      {!loaded && (
+        <div className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-4 bg-[#0f0f0f]">
+          {block.poster && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={block.poster}
+              alt=""
+              aria-hidden
+              className="absolute inset-0 h-full w-full object-contain opacity-30"
+            />
+          )}
+          <span className="relative h-7 w-7 animate-spin rounded-full border-2 border-white/25 border-t-white/80" />
+          <span className="relative text-sm text-white/70">Loading the live prototype…</span>
+        </div>
+      )}
     </div>
   );
 }
