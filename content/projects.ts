@@ -52,6 +52,21 @@ export type CaseBlock =
   | { type: "impact"; heading: string; items: { stat: string; label: string }[] }
   /** Prominent call-to-action button (e.g. a playable prototype link). */
   | { type: "cta"; label: string; href: string; note?: string }
+  /**
+   * A live embedded Figma prototype. `src` is the normal Figma proto share URL;
+   * it's wrapped into an embed iframe at render time. `ratio` is a CSS
+   * aspect-ratio string (e.g. "4 / 5"); `href` adds an "Open in Figma" link.
+   */
+  | {
+      type: "embed";
+      label?: string;
+      title: string;
+      body?: string[];
+      src: string;
+      ratio?: string;
+      href?: string;
+      note?: string;
+    }
   | {
       type: "gallery";
       heading: string;
@@ -746,14 +761,16 @@ export const projects: Project[] = [
         ],
       },
       {
-        type: "feature",
+        type: "embed",
         label: "The result",
-        layout: "side",
         title: "A clock that actually ticks",
         body: [
-          "Every second, the hands move. The orange second hand sweeps the face, the minute hand steps forward, and the hour hand drifts along with it. The digital readout below mirrors the same variables, so the two never disagree.",
+          "This is the real thing — a live Figma prototype running right here. Every second the hands move: the orange second hand sweeps the face, the minute hand steps forward, and the hour hand drifts along with it, while the digital readout below mirrors the same variables.",
         ],
-        images: ["/projects/analog-clock/clock.webp"],
+        src: "https://www.figma.com/proto/s8GT4SRB45uQsTI59rjknG/Portfolio-2024?node-id=1182-665&t=b3ko6wwWKPpT1Ced-1&scaling=contain&content-scaling=fixed&starting-point-node-id=1182%3A655&page-id=105%3A68",
+        ratio: "4 / 5",
+        href: "https://www.figma.com/proto/s8GT4SRB45uQsTI59rjknG/Portfolio-2024?node-id=1182-665&scaling=contain&content-scaling=fixed&starting-point-node-id=1182%3A655&page-id=105%3A68",
+        note: "Live Figma prototype — give it a moment to load, then watch it tick.",
       },
       {
         type: "labeled",

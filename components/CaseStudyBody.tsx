@@ -218,6 +218,51 @@ function Block({
         </section>
       );
 
+    case "embed": {
+      const embedUrl =
+        block.src.replace("https://www.figma.com/", "https://embed.figma.com/") +
+        "&embed-host=share";
+      return (
+        <motion.section {...reveal} className="mt-20">
+          <div className="max-w-3xl">
+            {block.label && <SectionLabel>{block.label}</SectionLabel>}
+            <h2 className={`${block.label ? "mt-3" : ""} font-display text-2xl font-medium tracking-tight sm:text-3xl`}>
+              {block.title}
+            </h2>
+            {block.body?.map((p, i) => (
+              <p key={i} className="mt-4 text-lg leading-relaxed text-muted">
+                {p}
+              </p>
+            ))}
+          </div>
+          <div className="mt-8 overflow-hidden rounded-2xl border border-border bg-[#0f0f0f]">
+            <iframe
+              src={embedUrl}
+              title={block.title}
+              className="block w-full border-0"
+              style={{ aspectRatio: block.ratio ?? "4 / 5" }}
+              allowFullScreen
+              loading="lazy"
+            />
+          </div>
+          <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
+            {block.note && <p className="text-sm text-muted">{block.note}</p>}
+            {block.href && (
+              <a
+                href={block.href}
+                target="_blank"
+                rel="noreferrer"
+                className="group inline-flex items-center gap-1.5 text-sm font-medium text-accent"
+              >
+                Open in Figma
+                <ArrowUpRight size={15} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              </a>
+            )}
+          </div>
+        </motion.section>
+      );
+    }
+
     case "impact":
       return (
         <section className="mt-20">
