@@ -656,10 +656,16 @@ export const projects: Project[] = [
         ],
       },
       {
-        type: "cta",
-        label: "Play the prototype",
-        href: "https://www.figma.com/proto/2RNRdsPeNoZgIp5HU6kIsl/Ping-Pong---Analog-Clock?node-id=3-1760&t=MTlj06J3K8RDxDGI-1&scaling=contain&content-scaling=fixed&starting-point-node-id=3%3A1760&page-id=0%3A1",
-        note: "Opens in Figma · use ← / → keys or the on-screen buttons to move the paddle",
+        type: "embed",
+        label: "Play it",
+        title: "Have a go",
+        body: [
+          "The full game, running live in Figma right here. Click into it, then use the ← / → keys or the on-screen buttons to move the paddle — every clean hit scores, a miss ends the round.",
+        ],
+        src: "https://www.figma.com/proto/2RNRdsPeNoZgIp5HU6kIsl/Ping-Pong---Analog-Clock?node-id=3-1760&t=MTlj06J3K8RDxDGI-1&scaling=contain&content-scaling=fixed&starting-point-node-id=3%3A1760&page-id=0%3A1",
+        ratio: "16 / 11",
+        href: "https://www.figma.com/proto/2RNRdsPeNoZgIp5HU6kIsl/Ping-Pong---Analog-Clock?node-id=3-1760&scaling=contain&content-scaling=fixed&starting-point-node-id=3%3A1760&page-id=0%3A1",
+        note: "Live Figma prototype — click in first, then use ← / → or the buttons.",
       },
       {
         type: "prose",
