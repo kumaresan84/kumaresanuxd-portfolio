@@ -505,7 +505,26 @@ export default function CaseStudyBody({
         transition={{ duration: 0.8, delay: 0.2, ease }}
         className="mt-12 overflow-hidden rounded-2xl border border-border"
       >
-        <ProjectVisual project={project} className="aspect-[950/622]" />
+        {project.coverHref ? (
+          <a
+            href={project.coverHref}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={`Open the ${project.title} prototype in a new tab`}
+            className="group relative block"
+          >
+            <ProjectVisual project={project} className="aspect-[950/622]" />
+            <span className="pointer-events-none absolute inset-0 flex items-center justify-center bg-background/0 opacity-0 transition-all duration-300 group-hover:bg-background/25 group-hover:opacity-100">
+              <span className="flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-medium text-accent-foreground shadow-lg">
+                <Play size={15} className="fill-current" />
+                Open prototype
+                <ArrowUpRight size={15} />
+              </span>
+            </span>
+          </a>
+        ) : (
+          <ProjectVisual project={project} className="aspect-[950/622]" />
+        )}
       </motion.div>
 
       {project.blocks?.map((block, i) => (

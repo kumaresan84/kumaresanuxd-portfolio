@@ -90,6 +90,8 @@ export type Project = {
   gradient: [string, string];
   /** Real cover image at public/projects/<slug>/cover.* (auto-detected). */
   cover?: string;
+  /** If set, the case-study hero cover links here (opens in a new tab) — e.g. a live prototype. */
+  coverHref?: string;
   /** The case-study story. */
   blocks?: CaseBlock[];
 };
@@ -645,6 +647,8 @@ export const projects: Project[] = [
     title: "Game: Ping-Pong",
     tag: "Figma Prototype",
     gradient: ["#1f4d3a", "#6fbf95"],
+    coverHref:
+      "https://www.figma.com/proto/2RNRdsPeNoZgIp5HU6kIsl/Ping-Pong---Analog-Clock?node-id=3-1760&scaling=contain&content-scaling=fixed&starting-point-node-id=3%3A1760&page-id=0%3A1",
     summary:
       "A playable Ping-Pong game designed entirely in Figma using variables and advanced prototyping logic.",
     blocks: [
@@ -744,6 +748,8 @@ export const projects: Project[] = [
     title: "Analog Clock",
     tag: "Figma + Variables",
     gradient: ["#1c2a3a", "#7f8fa6"],
+    coverHref:
+      "https://www.figma.com/proto/2RNRdsPeNoZgIp5HU6kIsl/Ping-Pong---Analog-Clock?node-id=3-1844&scaling=contain&content-scaling=fixed&starting-point-node-id=3%3A1844&page-id=0%3A1",
     summary:
       "A live analog clock that keeps real time — built with nothing but Figma design, variables, conditional logic, and a plugin loop.",
     blocks: [
