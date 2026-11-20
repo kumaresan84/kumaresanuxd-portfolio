@@ -658,7 +658,7 @@ export const projects: Project[] = [
       {
         type: "cta",
         label: "Play the prototype",
-        href: "https://www.figma.com/proto/s8GT4SRB45uQsTI59rjknG/Portfolio-2024?node-id=590-717&page-id=105%3A68&starting-point-node-id=590%3A683&scaling=contain&content-scaling=fixed",
+        href: "https://www.figma.com/proto/2RNRdsPeNoZgIp5HU6kIsl/Ping-Pong---Analog-Clock?node-id=3-1760&t=MTlj06J3K8RDxDGI-1&scaling=contain&content-scaling=fixed&starting-point-node-id=3%3A1760&page-id=0%3A1",
         note: "Opens in Figma · use ← / → keys or the on-screen buttons to move the paddle",
       },
       {
@@ -725,7 +725,7 @@ export const projects: Project[] = [
       {
         type: "cta",
         label: "Play the prototype",
-        href: "https://www.figma.com/proto/s8GT4SRB45uQsTI59rjknG/Portfolio-2024?node-id=590-717&page-id=105%3A68&starting-point-node-id=590%3A683&scaling=contain&content-scaling=fixed",
+        href: "https://www.figma.com/proto/2RNRdsPeNoZgIp5HU6kIsl/Ping-Pong---Analog-Clock?node-id=3-1760&t=MTlj06J3K8RDxDGI-1&scaling=contain&content-scaling=fixed&starting-point-node-id=3%3A1760&page-id=0%3A1",
       },
     ],
   },
@@ -767,9 +767,9 @@ export const projects: Project[] = [
         body: [
           "This is the real thing — a live Figma prototype running right here. Every second the hands move: the orange second hand sweeps the face, the minute hand steps forward, and the hour hand drifts along with it, while the digital readout below mirrors the same variables.",
         ],
-        src: "https://www.figma.com/proto/s8GT4SRB45uQsTI59rjknG/Portfolio-2024?node-id=1182-665&t=b3ko6wwWKPpT1Ced-1&scaling=contain&content-scaling=fixed&starting-point-node-id=1182%3A655&page-id=105%3A68",
+        src: "https://www.figma.com/proto/2RNRdsPeNoZgIp5HU6kIsl/Ping-Pong---Analog-Clock?node-id=3-1844&t=MTlj06J3K8RDxDGI-1&scaling=contain&content-scaling=fixed&starting-point-node-id=3%3A1844&page-id=0%3A1",
         ratio: "4 / 5",
-        href: "https://www.figma.com/proto/s8GT4SRB45uQsTI59rjknG/Portfolio-2024?node-id=1182-665&scaling=contain&content-scaling=fixed&starting-point-node-id=1182%3A655&page-id=105%3A68",
+        href: "https://www.figma.com/proto/2RNRdsPeNoZgIp5HU6kIsl/Ping-Pong---Analog-Clock?node-id=3-1844&scaling=contain&content-scaling=fixed&starting-point-node-id=3%3A1844&page-id=0%3A1",
         note: "Live Figma prototype — give it a moment to load, then watch it tick.",
       },
       {
