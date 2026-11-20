@@ -12,20 +12,6 @@
   --ink-foreground: #f4efe6;
 }
 
-html.dark {
-  --background: #12100c;
-  --surface: #1a1712;
-  --foreground: #f4efe6;
-  --muted: #a2968a;
-  --border: #2b261f;
-  --accent: #38bdf8;
-  --accent-foreground: #082032;
-  --ink: #0a0908;
-  --ink-foreground: #f4efe6;
-}
-
-@custom-variant dark (&:where(.dark, .dark *));
-
 @theme inline {
   --color-background: var(--background);
   --color-surface: var(--surface);

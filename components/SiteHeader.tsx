@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { profile } from "@/content/profile";
-import ThemeToggle from "@/components/ThemeToggle";
 
 const links = [
   { href: "/#work", label: "Work" },
@@ -53,7 +52,6 @@ export default function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <ThemeToggle />
           <a
             href={profile.resumeHref}
             target="_blank"

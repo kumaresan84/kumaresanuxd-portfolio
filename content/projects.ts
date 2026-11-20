@@ -715,27 +715,80 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: "micro-interaction-experiments",
+    slug: "analog-clock",
     category: "fun-projects",
-    title: "Micro-interaction Experiments",
-    tag: "Motion",
-    gradient: ["#39424d", "#93a6b8"],
+    title: "Analog Clock",
+    tag: "Figma + Variables",
+    gradient: ["#1c2a3a", "#7f8fa6"],
     summary:
-      "A prototype playground for button states, transitions, and delight moments — testing how far small motion can carry an experience.",
+      "A live analog clock that keeps real time — built with nothing but Figma design, variables, conditional logic, and a plugin loop.",
     blocks: [
       {
         type: "metaBar",
         items: [
-          { label: "Role", value: "Interaction Designer" },
-          { label: "Discipline", value: "Motion" },
-          { label: "Tool", value: "Figma · Prototype" },
-          { label: "Focus", value: "States · transitions" },
+          { label: "Role", value: "Designer / Prototyper" },
+          { label: "Tool", value: "Figma + plugin" },
+          { label: "Technique", value: "Variables · conditional logic" },
+          { label: "Type", value: "Live demo" },
         ],
       },
       {
         type: "prose",
         body: [
-          "Small, self-contained motion studies — hover states, transitions, and delight moments — exploring how much a little movement can add to an interface.",
+          "A working analog clock, built entirely inside Figma — no front-end code. Three time variables, a stack of conditional rules, and a small plugin that ticks once a second keep the hour, minute, and second hands pointing at the real time.",
+        ],
+      },
+      {
+        type: "prose",
+        heading: "The Challenge",
+        body: [
+          "Figma draws static pictures. Could it instead run a clock — hands that sweep to the correct angle, roll a full minute into the next, carry an hour at midnight, and keep doing it indefinitely — using only variables and the kind of logic meant for screen-to-screen prototypes?",
+        ],
+      },
+      {
+        type: "feature",
+        label: "The result",
+        layout: "side",
+        title: "A clock that actually ticks",
+        body: [
+          "Every second, the hands move. The orange second hand sweeps the face, the minute hand steps forward, and the hour hand drifts along with it. The digital readout below mirrors the same variables, so the two never disagree.",
+        ],
+        images: ["/projects/analog-clock/clock.webp"],
+      },
+      {
+        type: "labeled",
+        heading: "Built on variables",
+        items: [
+          { label: "Hour · Minute · Second", body: "Three number variables hold the live time — the single source of truth the whole clock reads from." },
+          { label: "Carry logic", body: "When Second hits 60 it resets and bumps Minute; when Minute hits 60 it resets and bumps Hour; Hour wraps at 12." },
+          { label: "Hand position", body: "Each variable maps to a hand angle — the minute value nudges the hour hand forward in steps, so it never jumps." },
+          { label: "Component variants", body: "The hands are component sets with a variant for every position; the time variables simply select the matching one." },
+        ],
+      },
+      {
+        type: "prose",
+        heading: "The time engine",
+        body: [
+          "A small plugin — \"Update Time Variables\" — runs a one-second loop. On every tick it re-evaluates the conditional chain: add a second, carry into minutes, carry into hours, wrap at twelve. The updated values flow straight into the hands and the digital display, so the clock advances on its own without a single line of app code.",
+        ],
+      },
+      {
+        type: "gallery",
+        heading: "Under the hood",
+        images: [
+          "/projects/analog-clock/logic-time.webp",
+          "/projects/analog-clock/ticks-hours.webp",
+          "/projects/analog-clock/ticks-minutes.webp",
+        ],
+        layout: "grid",
+      },
+      {
+        type: "impact",
+        heading: "Outcome",
+        items: [
+          { stat: "Ticks every second", label: "a plugin-driven loop keeps the clock live and self-updating, hands and digits in sync." },
+          { stat: "Pure Figma", label: "design, variables, conditional logic and one plugin — no front-end code anywhere." },
+          { stat: "Every angle pre-built", label: "hour, minute and second hands are variant sets; the time just picks the right position." },
         ],
       },
     ],

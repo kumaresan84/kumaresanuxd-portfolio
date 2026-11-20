@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Fraunces, Caveat } from "next/font/google";
 import SmoothScroll from "@/components/SmoothScroll";
-import { themeInitScript } from "@/components/ThemeToggle";
 import "./globals.css";
 
 const inter = Inter({
@@ -38,11 +37,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      suppressHydrationWarning
       className={`${inter.variable} ${fraunces.variable} ${caveat.variable} h-full antialiased`}
     >
       <body className="grain min-h-full font-sans">
-        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <SmoothScroll />
         {children}
       </body>
