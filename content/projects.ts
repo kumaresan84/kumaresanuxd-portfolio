@@ -76,7 +76,7 @@ export type CaseBlock =
       images?: string[];
       /** filename prefix to pull from the folder, for projects with several galleries */
       match?: string;
-      layout?: "grid" | "single";
+      layout?: "grid" | "single" | "masonry";
     };
 
 export type Project = {
@@ -629,8 +629,15 @@ export const projects: Project[] = [
       {
         type: "prose",
         body: [
-          "An ongoing personal practice — character studies exploring expression, silhouette, and personality, from quick sketches to finished pieces.",
+          "An ongoing personal practice — character studies exploring expression, silhouette, and personality. The set ranges across styles: Pixar-flavoured cartoon portraits, ink-and-wash studies, moody concept art, and loose watercolour scenes.",
+          "Each piece is a sketchbook experiment in a different medium and mood — a way to keep the drawing muscle sharp between product work.",
         ],
+      },
+      {
+        type: "gallery",
+        heading: "The collection",
+        layout: "masonry",
+        note: "Click any piece to view it full size.",
       },
     ],
   },

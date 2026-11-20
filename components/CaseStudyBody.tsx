@@ -35,6 +35,7 @@ function Gallery({
 }) {
   const images = block.images ?? [];
   const single = block.layout === "single";
+  const masonry = block.layout === "masonry";
 
   if (images.length === 0) {
     return (
@@ -43,6 +44,38 @@ function Gallery({
         <p className="mt-2 max-w-sm text-sm text-muted/80">
           {block.note ?? `Drop images into public/projects/${slug}/ to fill this section.`}
         </p>
+      </div>
+    );
+  }
+
+  // Masonry: each piece keeps its natural proportions, tightly packed across
+  // CSS columns — ideal for an art set with mixed portrait/landscape ratios.
+  if (masonry) {
+    return (
+      <div className="mt-8 columns-1 gap-5 sm:columns-2 lg:columns-3 [column-fill:balance]">
+        {images.map((src) => (
+          <motion.button
+            key={src}
+            {...reveal}
+            onClick={() => onOpen(src)}
+            aria-label={`Open ${block.heading} image in full view`}
+            className="group relative mb-5 block w-full cursor-zoom-in overflow-hidden rounded-2xl border border-border bg-surface break-inside-avoid"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={src}
+              alt={`${block.heading} piece`}
+              loading="lazy"
+              decoding="async"
+              className="block w-full transition-transform duration-500 group-hover:scale-[1.02]"
+            />
+            <span className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:bg-background/20 group-hover:opacity-100">
+              <span className="flex h-11 w-11 items-center justify-center rounded-full border border-border bg-surface/90 text-foreground backdrop-blur">
+                <Maximize2 size={18} />
+              </span>
+            </span>
+          </motion.button>
+        ))}
       </div>
     );
   }
