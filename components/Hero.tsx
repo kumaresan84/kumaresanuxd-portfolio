@@ -8,7 +8,7 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 export default function Hero() {
   return (
-    <section className="relative flex items-center pb-12 pt-24 sm:pb-16 lg:pb-32 lg:pt-32">
+    <section className="relative flex items-center pb-12 pt-24 sm:pb-16 lg:min-h-[calc(100svh-62px)] lg:py-28">
       <div className="relative mx-auto grid w-full max-w-7xl items-center gap-6 px-6 sm:gap-8 lg:grid-cols-2 lg:gap-10 lg:px-10">
         {/* ── Left: copy ── */}
         <div className="order-2 lg:order-1">
