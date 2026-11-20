@@ -8,8 +8,8 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 export default function Hero() {
   return (
-    <section className="relative flex min-h-svh items-center pb-16 pt-32">
-      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-12 px-6 lg:grid-cols-2 lg:gap-10 lg:px-10">
+    <section className="relative flex items-center pb-12 pt-24 sm:pb-16 lg:min-h-svh lg:pt-32">
+      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-6 px-6 sm:gap-8 lg:grid-cols-2 lg:gap-10 lg:px-10">
         {/* ── Left: copy ── */}
         <div className="order-2 lg:order-1">
           <motion.span
